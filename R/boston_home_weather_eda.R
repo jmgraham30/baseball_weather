@@ -31,6 +31,10 @@ boston_game_weather %>%
   geom_histogram()
 
 boston_game_weather %>%
+  ggplot(aes(x=vis_runs)) + 
+  geom_histogram()
+
+boston_game_weather %>%
   ggplot(aes(x=wl)) + 
   geom_bar()
 
@@ -50,4 +54,7 @@ boston_game_weather %>%
   ggplot(aes(x=tempF)) + 
   geom_histogram()
 
+boston_game_weather %>%
+  select(-c(hm_tm,dbl_hdr,vis_runs,score_diff,tempK,year,month,day,wl_binary)) %>%
+  ggpairs()
 
