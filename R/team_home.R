@@ -24,7 +24,7 @@ team_games <- function(year_val,team_abbr){
 
 x <- c(1912:2019,2021,2022)
 
-t_dl_bos <- future_map_dfr(x[-109],team_games,list(team_abbr="BOS"))
+t_dl_bos <- future_map_dfr(x,team_games,list(team_abbr="BOS"))
 
 glimpse(t_dl_bos)
 
