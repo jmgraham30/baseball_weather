@@ -38,5 +38,5 @@ x <- c(1912:2019,2021,2022)
 # apply future map to desired years for Boston Red Sox
 t_dl_bos <- future_map_dfr(x,team_games,list(team_abbr="BOS"))
 
-# save the resulting ddata frame as a csv file for later use
+# save the resulting data frame as a csv file for later use
 write_csv(t_dl_bos,"data/boston_home.csv")
