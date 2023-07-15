@@ -92,3 +92,17 @@ boston_game_weather %>%
   geom_point() + 
   geom_smooth(method = "lm")
 
+
+boston_game_weather %>%
+  ggplot(aes(x=humid,y=hm_runs)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  ggplot(aes(x=tempF,y=hm_runs)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  ggplot(aes(x=wl,y=hm_runs)) + 
+  geom_boxplot()
