@@ -55,6 +55,10 @@ boston_game_weather %>%
   geom_histogram()
 
 boston_game_weather %>%
+  ggplot(aes(x=precip)) + 
+  geom_histogram()
+
+boston_game_weather %>%
   select(-c(hm_tm,dbl_hdr,vis_runs,score_diff,tempK,year,month,day,wl_binary)) %>%
   ggpairs()
 
@@ -83,6 +87,11 @@ boston_game_weather %>%
   geom_smooth()
 
 boston_game_weather %>%
+  ggplot(aes(x=date,y=precip)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
   ggplot(aes(x=date,y=humid)) + 
   geom_point() + 
   geom_smooth(method = "lm")
@@ -92,6 +101,10 @@ boston_game_weather %>%
   geom_point() + 
   geom_smooth(method = "lm")
 
+boston_game_weather %>%
+  ggplot(aes(x=date,y=precip)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
 
 boston_game_weather %>%
   ggplot(aes(x=humid,y=hm_runs)) + 
@@ -100,6 +113,11 @@ boston_game_weather %>%
 
 boston_game_weather %>%
   ggplot(aes(x=tempF,y=hm_runs)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  ggplot(aes(x=precip,y=hm_runs)) + 
   geom_point() + 
   geom_smooth()
 
