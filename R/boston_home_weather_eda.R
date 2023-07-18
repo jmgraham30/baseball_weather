@@ -107,6 +107,27 @@ boston_game_weather %>%
   geom_smooth(method = "lm")
 
 boston_game_weather %>%
+  group_by(year) %>%
+  summarise(yearly_avg_tempF=mean(tempF)) %>%
+  ggplot(aes(x=year,y=yearly_avg_tempF)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  group_by(year) %>%
+  summarise(yearly_avg_humid=mean(humid)) %>%
+  ggplot(aes(x=year,y=yearly_avg_humid)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  group_by(year) %>%
+  summarise(yearly_avg_precip=mean(precip)) %>%
+  ggplot(aes(x=year,y=yearly_avg_precip)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
   ggplot(aes(x=humid,y=hm_runs)) + 
   geom_point() + 
   geom_smooth()
@@ -124,3 +145,49 @@ boston_game_weather %>%
 boston_game_weather %>%
   ggplot(aes(x=wl,y=hm_runs)) + 
   geom_boxplot()
+
+boston_game_weather %>%
+  ggplot(aes(x=wl,y=tempF)) + 
+  geom_boxplot()
+
+boston_game_weather %>%
+  ggplot(aes(x=wl,y=humid)) + 
+  geom_boxplot()
+
+boston_game_weather %>%
+  ggplot(aes(x=wl,y=precip)) + 
+  geom_boxplot()
+
+boston_game_weather %>%
+  ggplot(aes(x=humid,y=attendance)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  ggplot(aes(x=tempF,y=attendance)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  ggplot(aes(x=precip,y=attendance)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  filter(attendance > 0) %>%
+  ggplot(aes(x=humid,y=attendance)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  filter(attendance > 0) %>%
+  ggplot(aes(x=tempF,y=attendance)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  filter(attendance > 0) %>%
+  ggplot(aes(x=precip,y=attendance)) + 
+  geom_point() + 
+  geom_smooth()
+
