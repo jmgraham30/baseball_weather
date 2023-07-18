@@ -4,6 +4,7 @@ subtitle: "The Impacts of Weather Conditions"
 author: "Jason M Graham"
 institute: "University of Scranton"
 format: revealjs
+bibliography: presentation_bib.bib
 ---
 
 ```{r}
@@ -74,7 +75,7 @@ ggplot() +
 
 ## Fenway Park
 
-![ ](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){fig-align="center"}
+![Image from [@ticketmasterStepInside]](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){fig-align="center"}
 
 ## Quarto
 
