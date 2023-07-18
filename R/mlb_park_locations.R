@@ -44,8 +44,9 @@ ggplot() +
         axis.ticks.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.y = element_blank(),
-        axis.text.y = element_blank()) + 
-  xlab("") + ylab("")
+        axis.text.y = element_blank(),
+        plot.title = element_text(hjust = 0.5)) + 
+  xlab("") + ylab("") + ggtitle("Major League Baseball Parks")
 
 ggplot() +
   geom_polygon(data=states_df,
@@ -59,8 +60,9 @@ ggplot() +
         axis.ticks.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.y = element_blank(),
-        axis.text.y = element_blank()) + 
-  xlab("") + ylab("")
+        axis.text.y = element_blank(),
+        plot.title = element_text(hjust = 0.5)) + 
+  xlab("") + ylab("") + ggtitle("Major League Baseball Parks")
 
 ggplot() +
   geom_polygon(data=states_df,
@@ -72,7 +74,7 @@ ggplot() +
                                             aes(x=Longitude,y=Latitude),size=5,color="darkblue") + 
   geom_label( 
     data=baseball_parks %>% filter(Abbreviation == "BOS"), # Filter data first
-    aes(label="Fenway",x=-71,y=43.5),color = "black",
+    aes(label="Fenway",x=-71,y=43.6),color = "black",
     fill="red") + 
   scale_color_manual(values=c("orange","darkblue")) + 
   theme(panel.grid.major = element_blank(), 
@@ -80,8 +82,9 @@ ggplot() +
         axis.ticks.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.y = element_blank(),
-        axis.text.y = element_blank()) + 
-  xlab("") + ylab("")
+        axis.text.y = element_blank(),
+        plot.title = element_text(hjust = 0.5)) + 
+  xlab("") + ylab("") + ggtitle("Major League Baseball Parks")
 
 
 
