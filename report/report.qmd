@@ -6,6 +6,7 @@ institute: "University of Scranton"
 format: 
   html:
     code-fold: true
+    echo: true
 ---
 
 ```{r}
@@ -24,14 +25,58 @@ venues_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/ma
 
 bos_game_weather_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_game_weather.csv"
 
-bos_home_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_home.csv"
-
-bos_weather_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_weather_df.csv"
+# load map data for US states minus AK and HI
+states_df <- map_data("state") %>%
+  filter(region != "alaska" | region != "hawaii")
 ```
 
 
 ```{r}
+#| message: false
 
+# load weather and game data for Boston 
+bos_game_weather_df <- read_csv(bos_game_weather_html)
+# load sports venue data
+pro_sports_venues <- read_csv(venues_html)
+# extract baseball parks
+baseball_parks <- pro_sports_venues %>%
+  filter(Sport == "MLB")
+
+# add info about open roof
+baseball_parks$Open_Roof <- c("No",rep("Yes",9),
+                              "No","Yes","Yes","Yes",
+                              "No","No",
+                              rep("Yes",7),"No","Yes",
+                              "Yes","No","No","No","Yes")
+```
+
+@fig-parks
+
+```{r}
+#| label: fig-parks
+#| fig-cap: MLB park locations and open-air status, Fenway Park in Boston is highlighted.
+
+ggplot() +
+  geom_polygon(data=states_df,
+               aes(long,lat,group=group),
+               fill="white",color="darkgrey") + 
+  geom_point(data=baseball_parks,aes(x=Longitude,y=Latitude,color=Open_Roof),
+             size=2.5) +
+  geom_point(data=baseball_parks %>% filter(Abbreviation == "BOS"),
+                                            aes(x=Longitude,y=Latitude),size=5,color="darkblue") + 
+  geom_label( 
+    data=baseball_parks %>% filter(Abbreviation == "BOS"), # Filter data first
+    aes(label="Fenway",x=-71,y=43.6),color = "black",
+    fill="red") + 
+  scale_color_manual(values=c("orange","darkblue")) + 
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        plot.title = element_text(hjust = 0.5)) + 
+  xlab("") + ylab("") + ggtitle("Major League Baseball Parks")
 ```
 
 ## Quarto
