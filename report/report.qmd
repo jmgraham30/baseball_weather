@@ -79,6 +79,10 @@ ggplot() +
   xlab("") + ylab("") + ggtitle("Major League Baseball Parks")
 ```
 
+@fig-fenway
+
+![Feway Park](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){#fig-fenway width=70%}
+
 ## Quarto
 
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
