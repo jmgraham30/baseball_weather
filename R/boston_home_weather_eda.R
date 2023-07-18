@@ -191,3 +191,19 @@ boston_game_weather %>%
   geom_point() + 
   geom_smooth()
 
+
+boston_game_weather %>%
+  ggplot(aes(x=humid,y=duration)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  ggplot(aes(x=tempF,y=duration)) + 
+  geom_point() + 
+  geom_smooth()
+
+boston_game_weather %>%
+  ggplot(aes(x=precip,y=duration)) + 
+  geom_point() + 
+  geom_smooth()
+
