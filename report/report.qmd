@@ -1,7 +1,38 @@
 ---
-title: "Untitled"
-format: html
+title: "Open-Air Baseball Parks"
+subtitle: "The Impacts of Weather Conditions"
+author: "Jason M Graham"
+institute: "University of Scranton"
+format: 
+  html:
+    code-fold: true
 ---
+
+```{r}
+#| echo: false
+#| include: false
+
+# load packages
+library(tidyverse) # wrangling, plots etc.
+library(GGally) # paired plots
+library(skimr) # data summary
+
+# set plot theme
+theme_set(theme_minimal(base_size = 12))
+
+venues_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/USProSportsVenues.csv"
+
+bos_game_weather_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_game_weather.csv"
+
+bos_home_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_home.csv"
+
+bos_weather_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_weather_df.csv"
+```
+
+
+```{r}
+
+```
 
 ## Quarto
 
