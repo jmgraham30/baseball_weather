@@ -7,6 +7,7 @@ format:
   html:
     code-fold: true
     echo: true
+bibliography: report_bib.bib
 ---
 
 ```{r}
@@ -50,6 +51,7 @@ baseball_parks$Open_Roof <- c("No",rep("Yes",9),
                               "Yes","No","No","No","Yes")
 ```
 
+
 @fig-parks
 
 ```{r}
@@ -79,9 +81,9 @@ ggplot() +
   xlab("") + ylab("") + ggtitle("Major League Baseball Parks")
 ```
 
-@fig-fenway
+@fig-fenway, image from [@ticketmasterStepInside]
 
-![Feway Park](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){#fig-fenway width=70%}
+![Feway Park, image from [@ticketmasterStepInside]](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){#fig-fenway width=70%}
 
 ## Quarto
 
