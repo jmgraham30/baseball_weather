@@ -26,9 +26,6 @@ venues_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/ma
 
 bos_game_weather_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_game_weather.csv"
 
-# load map data for US states minus AK and HI
-states_df <- map_data("state") %>%
-  filter(region != "alaska" | region != "hawaii")
 ```
 
 
@@ -49,15 +46,21 @@ baseball_parks$Open_Roof <- c("No",rep("Yes",9),
                               "No","No",
                               rep("Yes",7),"No","Yes",
                               "Yes","No","No","No","Yes")
+
+# load map data for US states minus AK and HI
+states_df <- map_data("state") %>%
+  filter(region != "alaska" | region != "hawaii")
 ```
 
 ## Background
 
-[Major League Baseball](https://en.wikipedia.org/wiki/Major_League_Baseball) (MLB) is a professional athletics organization made up 30 baseball teams, 29 in the United States and one in Canada, [view MLB homepage](https://www.mlb.com/). Each of the thirty Major League Baseball teams plays in one of thirty stadiums or baseball parks [@wikipediaListCurrent]. A list of the thirty MLB stadiums can be found on Wikipedia, [go to Wikipedia article on MLB stadiums](https://en.wikipedia.org/wiki/List_of_current_Major_League_Baseball_stadiums). Of the thirty MLB baseball stadiums, 22 of them are open-air. @fig-parks shows a map of the MLB stadiums and uses color to designate the open-air status of each of the stadiums. 
+[Major League Baseball](https://en.wikipedia.org/wiki/Major_League_Baseball) (MLB) is a professional athletics organization made up 30 baseball teams, 29 in the United States and one in Canada, [view MLB homepage](https://www.mlb.com/). Each of the thirty Major League Baseball teams plays in one of thirty stadiums or baseball parks [@wikipediaListCurrent]. A list of the thirty MLB stadiums can be found on Wikipedia, [go to Wikipedia article on MLB stadiums](https://en.wikipedia.org/wiki/List_of_current_Major_League_Baseball_stadiums). Of the thirty MLB baseball stadiums, 22 of them are open-air. [^1] @fig-parks shows a map of the MLB stadiums and uses color to designate the open-air status of each of the stadiums. 
+
+[^1]: By "open-air" we mean permanently open with no option for roof cover. Stadiums with either a fixed or retractable roof are not considered to be open-air for our purposes. 
 
 ```{r}
 #| label: fig-parks
-#| fig-cap: The 30 MLB park locations and their open-air status. 
+#| fig-cap: The 30 MLB park locations and their open-air status. Darker shading indicates overlap of nearby parks. 
 #| fig-alt: A plot showing the location of each of the 30 MLB stadiums by its latitude and longitude overlayed on a map of the 48 continental United States. Colors are used to distinguish the open-air status of each of the stadiums, 22 of the 30 stadiums are designated as open-air.
 
 ggplot() +
@@ -65,7 +68,7 @@ ggplot() +
                aes(long,lat,group=group),
                fill="white",color="darkgrey") + 
   geom_point(data=baseball_parks,aes(x=Longitude,y=Latitude,color=Open_Roof),
-             size=2.5) +
+             size=2.5,alpha=0.5) +
   scale_color_manual(values=c("orange","darkblue")) + 
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
@@ -102,7 +105,7 @@ ggplot() +
                aes(long,lat,group=group),
                fill="white",color="darkgrey") + 
   geom_point(data=baseball_parks,aes(x=Longitude,y=Latitude,color=Open_Roof),
-             size=2.5) +
+             size=2.5,alpha=0.5) +
   geom_point(data=baseball_parks %>% filter(Abbreviation == "BOS"),
                                             aes(x=Longitude,y=Latitude),size=5,color="darkblue") + 
   geom_label( 
@@ -117,7 +120,7 @@ ggplot() +
         axis.ticks.y = element_blank(),
         axis.text.y = element_blank(),
         plot.title = element_text(hjust = 0.5)) + 
-  xlab("") + ylab("") + ggtitle("Major League Baseball Parks")
+  xlab("") + ylab("") + ggtitle("Major League Baseball Parks (Fenway Highlighted)")
 ```
 
 ## Data Collection and Documentation
