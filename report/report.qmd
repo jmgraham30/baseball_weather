@@ -51,12 +51,51 @@ baseball_parks$Open_Roof <- c("No",rep("Yes",9),
                               "Yes","No","No","No","Yes")
 ```
 
+## Background
 
-@fig-parks
+[Major League Baseball](https://en.wikipedia.org/wiki/Major_League_Baseball) (MLB) is a professional athletics organization made up 30 baseball teams, 29 in the United States and one in Canada, [view MLB homepage](https://www.mlb.com/). Each of the thirty Major League Baseball teams plays in one of thirty stadiums or baseball parks [@wikipediaListCurrent]. A list of the thirty MLB stadiums can be found on Wikipedia, [go to Wikipedia article on MLB stadiums](https://en.wikipedia.org/wiki/List_of_current_Major_League_Baseball_stadiums). Of the thirty MLB baseball stadiums, 22 of them are open-air. @fig-parks shows a map of the MLB stadiums and uses color to designate the open-air status of each of the stadiums. 
 
 ```{r}
 #| label: fig-parks
-#| fig-cap: MLB park locations and open-air status, Fenway Park in Boston is highlighted.
+#| fig-cap: The 30 MLB park locations and their open-air status. 
+#| fig-alt: A plot showing the location of each of the 30 MLB stadiums by its latitude and longitude overlayed on a map of the 48 continental United States. Colors are used to distinguish the open-air status of each of the stadiums, 22 of the 30 stadiums are designated as open-air.
+
+ggplot() +
+  geom_polygon(data=states_df,
+               aes(long,lat,group=group),
+               fill="white",color="darkgrey") + 
+  geom_point(data=baseball_parks,aes(x=Longitude,y=Latitude,color=Open_Roof),
+             size=2.5) +
+  scale_color_manual(values=c("orange","darkblue")) + 
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        plot.title = element_text(hjust = 0.5)) + 
+  xlab("") + ylab("") + ggtitle("Major League Baseball Parks")
+```
+
+### Initial Research Question
+
+We would like to know about the impact that climate or weather may have on MLB teams that play in open-air stadiums. Given that climate and weather patterns are changing and impacting many aspects of our society and lives, and given that many MLB parks are exposed to the elements for many months of the year, it could be that changing climate and weather conditions may impact MLB. In particular, we would like to know if changing climate and weather patterns might have an effect on either team performance or game attendance. 
+
+### Approach to Research
+
+In order to address our initial research question, we will take as a case study , home of the [Boston Red Sox](https://en.wikipedia.org/wiki/Boston_Red_Sox), [view Red Sox homepage](https://www.mlb.com/redsox).
+
+
+@fig-fenway, image from [@ticketmasterStepInside]
+
+![Feway Park, image from [@ticketmasterStepInside]](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){#fig-fenway width=70%}
+
+
+@fig-parks-fenway
+
+```{r}
+#| label: fig-parks-fenway
+#| fig-cap: MLB park locations and open-air status with Fenway Park in Boston, MA highlighted.
 
 ggplot() +
   geom_polygon(data=states_df,
@@ -81,30 +120,16 @@ ggplot() +
   xlab("") + ylab("") + ggtitle("Major League Baseball Parks")
 ```
 
-@fig-fenway, image from [@ticketmasterStepInside]
+## Data Collection and Documentation
 
-![Feway Park, image from [@ticketmasterStepInside]](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){#fig-fenway width=70%}
+### Team Data
 
-## Quarto
+### Weather Data
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
-## Running Code
+## Exploratory Results
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this 
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
 
 ## References
 
