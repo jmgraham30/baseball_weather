@@ -1,7 +1,7 @@
 ---
 title: "Open-Air Baseball Parks"
 subtitle: "The Impacts of Weather Conditions"
-author: "Jason M Graham"
+author: "Jason M. Graham"
 institute: "University of Scranton"
 format: 
   html:
@@ -52,6 +52,9 @@ states_df <- map_data("state") %>%
   filter(region != "alaska" | region != "hawaii")
 ```
 
+## Executive Summary
+
+
 ## Background
 
 [Major League Baseball](https://en.wikipedia.org/wiki/Major_League_Baseball) (MLB) is a professional athletics organization made up 30 baseball teams, 29 in the United States and one in Canada, [view MLB homepage](https://www.mlb.com/). Each of the thirty Major League Baseball teams plays in one of thirty stadiums or baseball parks [@wikipediaListCurrent]. A list of the thirty MLB stadiums can be found on Wikipedia, [go to Wikipedia article on MLB stadiums](https://en.wikipedia.org/wiki/List_of_current_Major_League_Baseball_stadiums). Of the thirty MLB baseball stadiums, 22 of them are open-air. [^1] @fig-parks shows a map of the MLB stadiums and uses color to designate the open-air status of each of the stadiums. 
@@ -86,15 +89,12 @@ We would like to know about the impact that climate or weather may have on MLB t
 
 ### Approach to Research
 
-In order to address our initial research question, we will take as a case study , home of the [Boston Red Sox](https://en.wikipedia.org/wiki/Boston_Red_Sox), [view Red Sox homepage](https://www.mlb.com/redsox).
+In order to address our initial research question, we will take as a case study the open-air stadium [Fenway Park](https://en.wikipedia.org/wiki/Fenway_Park), home of the [Boston Red Sox](https://en.wikipedia.org/wiki/Boston_Red_Sox), [view Red Sox homepage](https://www.mlb.com/redsox). Fenway park in located in Boston, Massachusetts (42°20′46.5″N 71°5′51.9″W) and is the oldest MLB park, open since 1912 [@wikipediaFenwayPark], [see the Fenway homepage](https://www.mlb.com/redsox/ballpark). @fig-fenway shows a view of Fenway Park, image from [@ticketmasterStepInside]. @fig-parks-fenway shows the same map of MLB stadiums as @fig-parks but with Fenway Park highlighted. 
 
-
-@fig-fenway, image from [@ticketmasterStepInside]
 
 ![Feway Park, image from [@ticketmasterStepInside]](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){#fig-fenway width=70%}
 
 
-@fig-parks-fenway
 
 ```{r}
 #| label: fig-parks-fenway
@@ -122,6 +122,8 @@ ggplot() +
         plot.title = element_text(hjust = 0.5)) + 
   xlab("") + ylab("") + ggtitle("Major League Baseball Parks (Fenway Highlighted)")
 ```
+
+The main part of this project combines data about home games played at Fenway Park with historical Boston area weather data in an attempt to assess if changing climate and weather conditions have impacted either team performance or park attendance at Fenway, with Fenway serving as an example of an open-air baseball stadium. 
 
 ## Data Collection and Documentation
 
