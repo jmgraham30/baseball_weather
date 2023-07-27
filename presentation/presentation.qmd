@@ -45,11 +45,22 @@ baseball_parks$Open_Roof <- c("No",rep("Yes",9),
                               "Yes","No","No","No","Yes")
 ```
 
+## Initial Research Question
+
+::: {.incremental}
+
+- Each of the thirty Major League Baseball (MLB) teams plays in one of thirty stadiums or baseball parks.
+
+- Of the thirty MLB baseball stadiums, 22 of them are open-air.
+
+- **We would like to know if changing climate and weather patterns might have an effect on either team performance or game attendance.**
+
+:::
+
+
 ## MLB Parks 
 
 ```{r}
-#| label: fig-parks
-#| fig-cap: MLB park locations and open-air status, Fenway Park in Boston is highlighted.
 
 ggplot() +
   geom_polygon(data=states_df,
@@ -75,7 +86,7 @@ ggplot() +
 ```
 
 
-## Fenway Park
+## Fenway Park an Open-Air Park
 
 ![Image from [@ticketmasterStepInside]](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){fig-align="center"}
 
@@ -88,23 +99,5 @@ bos_game_weather_df %>%
   kable()
 ```
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
-
-## Bullets
-
-When you click the **Render** button a document will be generated that includes:
-
--   Content authored with markdown
--   Output from executable code
-
-## Code
-
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
 
 
