@@ -136,7 +136,7 @@ To address our primary question, we collected and combined two sets of data. The
 To obtain the data on home games played by the Boston Red Sox at Fenway Park, we used the function `get_retrosheet` from the R package `retrosheet` to download game data for a specific year and team [@retrosheet_cite]. Then, we used a function `team_games` to iterate over all the years that the Red Sox played at Fenway Park, that is, 1912 - 2022 (skipping 2020 due to the COVID-19 pandemic). The code to accomplish this is in the `team_home.R` script available at our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather). 
 
 
-The `retrosheet` package contains a collection of tools to import and structure the single-season event, game-log, roster, and schedule data available from the [Retrosheet website](https://www.retrosheet.org) which maintains play-by-play accounts of as many major league games as possible. The Retrosheet data we downloaded for the Boston Red Sox has a structure indicated by 
+The `retrosheet` package contains a collection of tools to import and structure the single-season event, game-log, roster, and schedule data available from the [Retrosheet website](https://www.retrosheet.org) which maintains play-by-play accounts of as many major league games as possible. The Retrosheet data we downloaded for the Boston Red Sox has a structure indicated by @tbl-boston-data.
 
 ```{r}
 #| message: false
@@ -154,8 +154,36 @@ bos_home_games %>%
 ```
 
 
+Each row corresponds to a single home game at Fenway. The columns of the data set specify for each game the date, whether the game is a double-header, the number of runs scored by the home team (Boston), the number of runs scored by the visiting team, the game attendance, the duration of the game in minutes, the difference between the home team score and the visiting team score, and whether Boston won (W) or did not win (NW). 
+
+The data set contains 8,634 rows or observations. 
 
 ### Weather Data
+
+We used R package [`RNCEP`](https://sites.google.com/site/michaelukemp/rncep) to download climate and weather data for the Boston area [@rncep_cite]. This package simplifies the access, organization, and visualization of weather data from the [NCEP/NCAR reanalysis](https://psl.noaa.gov/data/gridded/data.ncep.reanalysis.html) and [NCEP/DOE reanalysis II](https://psl.noaa.gov/data/gridded/data.ncep.reanalysis2.html) data sets. Specifically, we used the function `NCEP.gather.surface` to download data for the surface temperature (`air.sig995`), precipitation (`rhum.sig995`), and humidity (`pr_wtr.eatm`). See the documentation for `RNCEP` for more details and specifications of units used.  The climate and weather data we downloaded for Boston has a structure indicated by @tbl-boston-weather.
+
+```{r}
+#| message: false
+#| label: tbl-boston-weather
+#| tbl-cap: A few rows of the climate and weather data downloaded for Boston.
+
+bos_weather_url <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_weather_df.csv"
+
+bos_weather <- read_csv(bos_weather_url)
+
+bos_weather %>%
+  head(5) %>%
+  kable()
+
+```
+
+The data set contains 15,622 rows or observations. Note that the temperature, humidity, and precipitation values recorded are averaged daily and over a spatial region (between 41 and 42 degrees latitude and 289 and 290 degrees longitude). The code used to download the data is contained in the `boston_weather_get.R` script available our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather).
+
+### Combined Weather and Game Data
+
+In order to address our initial research question, we combined the Boston weather and home game data. It is important to emphasize 
+
+All the necessary data manipulations were accomplished through functions from the `dplyr` package [@dplyr_cite]. See the `boston_data_wrangling.R` script available our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather).
 
 
 ## Exploratory Results
