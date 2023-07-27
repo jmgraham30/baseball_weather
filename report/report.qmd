@@ -181,10 +181,29 @@ The data set contains 15,622 rows or observations. Note that the temperature, hu
 
 ### Combined Weather and Game Data
 
-In order to address our initial research question, we combined the Boston weather and home game data. It is important to emphasize 
+In order to address our initial research question, we combined the Boston weather and home game data. It is important to emphasize the following:
+
+- Climate and weather data is only available starting in the 1950's while Boston Red Sox home grame data goes back to 1912. Thus, we must restrict the home game data to those observations starting in the 1950's.
+
+- The downloaded climate and weather data contains observations for many more days than just the days on which there were Red Sox home games. Thus, we must extract those climate and weather observatios corresponding to dates of games at Fenway.  
 
 All the necessary data manipulations were accomplished through functions from the `dplyr` package [@dplyr_cite]. See the `boston_data_wrangling.R` script available our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather).
 
+
+The combined weather game data for the Boston Red Sox home games at Fenway Park has a structure indicated by @tbl-boston-game-weather.
+
+```{r}
+#| message: false
+#| label: tbl-boston-game-weather
+#| tbl-cap: A few rows of the weather and game data for the Boston Red Sox home games at Fenway Park.
+
+bos_game_weather_df %>%
+  head(5) %>%
+  kable()
+
+```
+
+This is our principal data set and it contains 5,727 rows.
 
 ## Exploratory Results
 
