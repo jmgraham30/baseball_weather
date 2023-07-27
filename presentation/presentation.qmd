@@ -15,6 +15,8 @@ bibliography: presentation_bib.bib
 library(tidyverse) # wrangling, plots etc.
 library(GGally) # paired plots
 library(skimr) # data summary
+library(knitr) # for table formatting
+library(kableExtra) # for extra table formatting 
 
 # set plot theme
 theme_set(theme_minimal(base_size = 12))
@@ -76,6 +78,15 @@ ggplot() +
 ## Fenway Park
 
 ![Image from [@ticketmasterStepInside]](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){fig-align="center"}
+
+
+## Fenway Home Game and Weather Data
+
+```{r}
+bos_game_weather_df %>%
+  head(3) %>%
+  kable()
+```
 
 ## Quarto
 
