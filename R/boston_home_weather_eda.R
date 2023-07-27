@@ -35,6 +35,10 @@ boston_game_weather %>%
   geom_histogram()
 
 boston_game_weather %>%
+  ggplot(aes(x=score_diff)) + 
+  geom_histogram()
+
+boston_game_weather %>%
   ggplot(aes(x=wl)) + 
   geom_bar()
 

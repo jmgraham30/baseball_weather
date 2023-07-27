@@ -18,6 +18,8 @@ bibliography: report_bib.bib
 library(tidyverse) # wrangling, plots etc.
 library(GGally) # paired plots
 library(skimr) # data summary
+library(knitr) # for table formatting
+library(kableExtra) # for extra table formatting 
 
 # set plot theme
 theme_set(theme_minimal(base_size = 12))
@@ -85,7 +87,7 @@ ggplot() +
 
 ### Initial Research Question
 
-We would like to know about the impact that climate or weather may have on MLB teams that play in open-air stadiums. Given that climate and weather patterns are changing and impacting many aspects of our society and lives, and given that many MLB parks are exposed to the elements for many months of the year, it could be that changing climate and weather conditions may impact MLB. In particular, we would like to know if changing climate and weather patterns might have an effect on either team performance or game attendance. 
+We would like to know about the impact that climate or weather may have on MLB teams that play in open-air stadiums. Given that climate and weather patterns are changing and impacting many aspects of our society and lives, and given that many MLB parks are exposed to the elements for many months of the year, it could be that changing climate and weather conditions may impact MLB. **In particular, we would like to know if changing climate and weather patterns might have an effect on either team performance or game attendance.**
 
 ### Approach to Research
 
@@ -123,11 +125,33 @@ ggplot() +
   xlab("") + ylab("") + ggtitle("Major League Baseball Parks (Fenway Highlighted)")
 ```
 
-The main part of this project combines data about home games played at Fenway Park with historical Boston area weather data in an attempt to assess if changing climate and weather conditions have impacted either team performance or park attendance at Fenway, with Fenway serving as an example of an open-air baseball stadium. 
+The main part of this project combines data about home games played at Fenway Park with historical Boston area weather data in an attempt to assess if changing climate and weather conditions have impacted either team performance or game attendance at Fenway, with Fenway serving as an example of an open-air baseball stadium. 
 
 ## Data Collection and Documentation
 
+To address our primary question, we collected and combined two sets of data. The first data set collected contains information about each home game played by the Boston Red Sox at Fenway Park. The second data set collected contains weather data such as in Boston over the available time frame of games at Fenway.    
+
 ### Team Data
+
+To obtain the data on home games played by the Boston Red Sox at Fenway Park, we used the function `get_retrosheet` from the R package `retrosheet` to download game data for a specific year and team [@retrosheet_cite]. Then, we used a function `team_games` to iterate over all the years that the Red Sox played at Fenway Park, that is, 1912 - 2022 (skipping 2020 due to the COVID-19 pandemic). The code to accomplish this is in the `team_home.R` script available at our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather). 
+
+
+The `retrosheet` package contains a collection of tools to import and structure the single-season event, game-log, roster, and schedule data available from the [Retrosheet website](https://www.retrosheet.org) which maintains play-by-play accounts of as many major league games as possible. The Retrosheet data we downloaded for the Boston Red Sox has a structure indicated by 
+
+```{r}
+#| message: false
+#| label: tbl-boston-data
+#| tbl-cap: A few rows of the Retrosheet data downloaded for the Boston Red Sox home games at Fenway Park.
+
+bos_home_games_url <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_home.csv"
+
+bos_home_games <- read_csv(bos_home_games_url)
+
+bos_home_games %>%
+  head(5) %>%
+  kable()
+
+```
 
 
 
