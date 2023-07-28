@@ -12,7 +12,7 @@ This repository contains:
 
 - A [report](https://github.com/jmgraham30/baseball_weather/tree/main/report) written as a [Quarto](https://quarto.org/) document presenting the problem, data, and analyses for this project. [View the rendered report](https://symphonious-crostata-5b1f0b.netlify.app/report/).
 
-- A [slide deck]() written as a [Quarto](https://quarto.org/) presentation that summarizes the problem, data, and analyses for this project. [View the rendered slides]().
+- A [slide deck]() written as a [Quarto](https://quarto.org/) presentation that summarizes the problem, data, and analyses for this project. [View the rendered slides](https://symphonious-crostata-5b1f0b.netlify.app/presentation/).
 
 
 ## License
