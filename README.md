@@ -1,6 +1,6 @@
 # Repository for Project on Open-Air Baseball Parks
 
-This repository contains:
+This repository is meant to serve as a model for the semester project assignment in the course DS 201 *Introduction to Data Science*, it contains:
 
 - The data needed to reproduce all analyses, see [data](https://github.com/jmgraham30/baseball_weather/tree/main/data) folder.
 
