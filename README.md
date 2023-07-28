@@ -1,6 +1,8 @@
 # Repository for Project on Open-Air Baseball Parks
 
-This repository is meant to serve as a model for the semester project assignment in the course DS 201 *Introduction to Data Science*, it contains:
+The content of this repository is meant to serve as a model for the semester project assignment in the course [DS 201 *Introduction to Data Science*](https://intro-ds.netlify.app/) as taught during the fall 2023 semester at the [University of Scranton](https://www.scranton.edu/). 
+
+One may find in this reposiroty:
 
 - The data needed to reproduce all analyses, see [data](https://github.com/jmgraham30/baseball_weather/tree/main/data) folder.
 
