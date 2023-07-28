@@ -10,7 +10,7 @@ This repository contains:
 
 - All code is contained in the [R](https://github.com/jmgraham30/baseball_weather/tree/main/R) folder.
 
-- A [report](https://github.com/jmgraham30/baseball_weather/tree/main/report) written as a [Quarto](https://quarto.org/) document presenting the problem, data, and analyses for this project. [View the rendered report]().
+- A [report](https://github.com/jmgraham30/baseball_weather/tree/main/report) written as a [Quarto](https://quarto.org/) document presenting the problem, data, and analyses for this project. [View the rendered report](https://symphonious-crostata-5b1f0b.netlify.app/report/).
 
 - A [slide deck]() written as a [Quarto](https://quarto.org/) presentation that summarizes the problem, data, and analyses for this project. [View the rendered slides]().
 
