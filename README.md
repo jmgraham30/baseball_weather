@@ -1,6 +1,6 @@
 # Repository for Project on Open-Air Baseball Parks
 
-This repository contains
+This repository contains:
 
 - The data needed to reproduce all analyses, see [data](https://github.com/jmgraham30/baseball_weather/tree/main/data) folder.
 
