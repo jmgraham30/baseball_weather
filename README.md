@@ -4,11 +4,11 @@ The content of this repository is meant to serve as a model for the semester pro
 
 One may find in this reposiroty:
 
-- The data needed to reproduce all analyses, see [data](https://github.com/jmgraham30/baseball_weather/tree/main/data) folder.
+- The data needed to reproduce the analyses, see [data](https://github.com/jmgraham30/baseball_weather/tree/main/data) folder.
 
 - The code used to download the raw data, see scripts `boston_weather_get.R`, `team_home.R`, and `mlb_park_locations.R`.
 
-- The code used to combine climate and weather data with data on home games played by the [Boston Red Sox](https://www.mlb.com/redsox) [MLB](https://www.mlb.com/) team and the [Fenway Park](https://www.mlb.com/redsox/ballpark) stadium.
+- The code used to combine climate and weather data with data on home games played by the [Boston Red Sox](https://www.mlb.com/redsox) [MLB](https://www.mlb.com/) team and the [Fenway Park](https://www.mlb.com/redsox/ballpark) stadium. See the script `boston_data_wrangling.R`.
 
 - All code is contained in the [R](https://github.com/jmgraham30/baseball_weather/tree/main/R) folder.
 
