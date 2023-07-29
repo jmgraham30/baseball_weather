@@ -20,6 +20,8 @@ library(GGally) # paired plots
 library(skimr) # data summary
 library(knitr) # for table formatting
 library(kableExtra) # for extra table formatting 
+library(patchwork) # for combining plots
+library(RColorBrewer) # for plot colors
 
 # set plot theme
 theme_set(theme_minimal(base_size = 12))
@@ -35,7 +37,7 @@ bos_game_weather_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_
 #| message: false
 
 # load weather and game data for Boston 
-bos_game_weather_df <- read_csv(bos_game_weather_html)
+boston_game_weather <- read_csv(bos_game_weather_html)
 # load sports venue data
 pro_sports_venues <- read_csv(venues_html)
 # extract baseball parks
@@ -197,7 +199,7 @@ The combined weather game data for the Boston Red Sox home games at Fenway Park 
 #| label: tbl-boston-game-weather
 #| tbl-cap: A few rows of the weather and game data for the Boston Red Sox home games at Fenway Park.
 
-bos_game_weather_df %>%
+boston_game_weather %>%
   head(5) %>%
   kable()
 
@@ -207,6 +209,65 @@ This is our principal data set and it contains 5,727 rows.
 
 ## Exploratory Results
 
+### Potential Response Variables
+
+```{r}
+#| message: false
+#| label: fig-rep1-edas
+#| fig-cap: Exploratory plots for the distributions of Red Sox runs, visitor runs, score difference, and wins for  Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020).
+
+ra_1 <- boston_game_weather %>%
+  ggplot(aes(x=hm_runs)) + 
+  geom_histogram(color="black",fill="lightblue") + 
+  xlab("Number of Runs by Boston") + 
+  ylab("Count")
+# Number of visitor runs
+ra_2 <- boston_game_weather %>%
+  ggplot(aes(x=vis_runs)) + 
+  geom_histogram(color="black",fill="lightblue") + 
+  xlab("Number of Runs by Visitors") + 
+  ylab("Count")
+# Boston runs - Visitor runs
+ra_3 <- boston_game_weather %>%
+  ggplot(aes(x=score_diff,fill=wl)) + 
+  geom_histogram(color="black") + 
+  scale_fill_manual(values = c("#E69F00","#009E73")) + 
+  labs(x = "Boston Runs - Visitor Runs",
+       y = "Count",
+       fill="Win/Not")
+# Win or Not Win
+ra_4 <- boston_game_weather %>%
+  ggplot(aes(x=wl,fill=wl)) + 
+  geom_bar(color="black") + 
+  scale_fill_manual(values = c("#E69F00","#009E73")) + 
+  theme(legend.position = "none") +
+  labs(x = "No Win or Win",
+       y = "Count")
+
+(ra_1 + ra_2) / (ra_4 + ra_3)
+```
+
+### Potential Predictor Variables
+
+```{r}
+#| message: false
+#| label: fig-rep2-edas
+#| fig-cap: Exploratory plots for the distributions of game duration and attendance and Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020).
+
+rb_1 <- boston_game_weather %>%
+  ggplot(aes(x=duration)) + 
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Game Duration",
+       y = "Count")
+# Game attendances
+rb_2 <- boston_game_weather %>%
+  ggplot(aes(x=attendance)) + 
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Game Attendance",
+       y = "Count")
+
+(rb_1 + rb_2)
+```
 
 
 ## Models

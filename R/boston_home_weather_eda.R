@@ -2,6 +2,8 @@
 library(tidyverse) # wrangling, plots etc.
 library(GGally) # paired plots
 library(skimr) # data summary
+library(patchwork) # for combining plots
+library(RColorBrewer) # for plot colors
 
 # set plot theme
 theme_set(theme_minimal(base_size = 12))
@@ -15,7 +17,8 @@ glimpse(boston_game_weather)
 # overall data summary
 skim(boston_game_weather)
 
-# some manipulations
+# create separate columns with day, month, and year corresponding
+# to game dates; and create a binary win (1) or not (0) column  
 boston_game_weather <- boston_game_weather %>%
   mutate(year=year(date),
          month=month(date),
@@ -25,30 +28,54 @@ boston_game_weather <- boston_game_weather %>%
 # check results
 glimpse(boston_game_weather)
 
-# initial plots
-boston_game_weather %>%
+#### initial exploratory plots
+# start with potential response variables
+
+# Number of Boston runs
+ra_1 <- boston_game_weather %>%
   ggplot(aes(x=hm_runs)) + 
-  geom_histogram()
-
-boston_game_weather %>%
+  geom_histogram(color="black",fill="lightblue") + 
+  xlab("Number of Runs by Boston") + 
+  ylab("Count")
+# Number of visitor runs
+ra_2 <- boston_game_weather %>%
   ggplot(aes(x=vis_runs)) + 
-  geom_histogram()
+  geom_histogram(color="black",fill="lightblue") + 
+  xlab("Number of Runs by Visitors") + 
+  ylab("Count")
+# Boston runs - Visitor runs
+ra_3 <- boston_game_weather %>%
+  ggplot(aes(x=score_diff,fill=wl)) + 
+  geom_histogram(color="black") + 
+  scale_fill_manual(values = c("#E69F00","#009E73")) + 
+  labs(x = "Boston Runs - Visitor Runs",
+       y = "Count",
+       fill="Win/Not")
+# Win or Not Win
+ra_4 <- boston_game_weather %>%
+  ggplot(aes(x=wl,fill=wl)) + 
+  geom_bar(color="black") + 
+  scale_fill_manual(values = c("#E69F00","#009E73")) + 
+  theme(legend.position = "none") +
+  labs(x = "No Win or Win",
+       y = "Count")
 
-boston_game_weather %>%
-  ggplot(aes(x=score_diff)) + 
-  geom_histogram()
+r_1 <- (ra_1 + ra_2) / (ra_4 + ra_3)
 
-boston_game_weather %>%
-  ggplot(aes(x=wl)) + 
-  geom_bar()
-
-boston_game_weather %>%
+# Game durations
+rb_1 <- boston_game_weather %>%
   ggplot(aes(x=duration)) + 
-  geom_histogram()
-
-boston_game_weather %>%
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Game Duration",
+       y = "Count")
+# Game attendances
+rb_2 <- boston_game_weather %>%
   ggplot(aes(x=attendance)) + 
-  geom_histogram()
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Game Attendance",
+       y = "Count")
+
+r_2 <- (rb_1 + rb_2)
 
 boston_game_weather %>%
   ggplot(aes(x=humid)) + 

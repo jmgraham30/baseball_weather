@@ -132,7 +132,7 @@ div.csl-indent {
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load weather and game data for Boston </span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>bos_game_weather_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(bos_game_weather_html)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>boston_game_weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(bos_game_weather_html)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load sports venue data</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pro_sports_venues <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(venues_html)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># extract baseball parks</span></span>
@@ -414,7 +414,7 @@ div.csl-indent {
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bos_game_weather_df <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -527,6 +527,80 @@ div.csl-indent {
 </section>
 <section id="exploratory-results" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-results">Exploratory Results</h2>
+<section id="potential-response-variables" class="level3">
+<h3 class="anchored" data-anchor-id="potential-response-variables">Potential Response Variables</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ra_1 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>hm_runs)) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"black"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Number of Runs by Boston"</span>) <span class="sc">+</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Count"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of visitor runs</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ra_2 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>vis_runs)) <span class="sc">+</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"black"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Number of Runs by Visitors"</span>) <span class="sc">+</span> </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Count"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Boston runs - Visitor runs</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>ra_3 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>score_diff,<span class="at">fill=</span>wl)) <span class="sc">+</span> </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>,<span class="st">"#009E73"</span>)) <span class="sc">+</span> </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Boston Runs - Visitor Runs"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="st">"Win/Not"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Win or Not Win</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>ra_4 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>wl,<span class="at">fill=</span>wl)) <span class="sc">+</span> </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>,<span class="st">"#009E73"</span>)) <span class="sc">+</span> </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"No Win or Win"</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>(ra_1 <span class="sc">+</span> ra_2) <span class="sc">/</span> (ra_4 <span class="sc">+</span> ra_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-rep1-edas" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-rep1-edas-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Exploratory plots for the distributions of Red Sox runs, visitor runs, score difference, and wins for Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="potential-predictor-variables" class="level3">
+<h3 class="anchored" data-anchor-id="potential-predictor-variables">Potential Predictor Variables</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rb_1 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>duration)) <span class="sc">+</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"black"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Game Duration"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Game attendances</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>rb_2 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>attendance)) <span class="sc">+</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"black"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Game Attendance"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>(rb_1 <span class="sc">+</span> rb_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-rep2-edas" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-rep2-edas-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Exploratory plots for the distributions of game duration and attendance and Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="models" class="level2">
 <h2 class="anchored" data-anchor-id="models">Models</h2>
@@ -583,27 +657,29 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-07-28
+ date     2023-07-29
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.433 @ /usr/local/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package     * version date (UTC) lib source
- dplyr       * 1.1.2   2023-04-20 [1] CRAN (R 4.3.0)
- forcats     * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
- GGally      * 2.1.2   2021-06-21 [1] CRAN (R 4.3.0)
- ggplot2     * 3.4.2   2023-04-03 [1] CRAN (R 4.3.0)
- kableExtra  * 1.3.4   2021-02-20 [1] CRAN (R 4.3.0)
- knitr       * 1.43    2023-05-25 [1] CRAN (R 4.3.0)
- lubridate   * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
- purrr       * 1.0.1   2023-01-10 [1] CRAN (R 4.3.0)
- readr       * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
- sessioninfo * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
- skimr       * 2.1.5   2022-12-23 [1] CRAN (R 4.3.0)
- stringr     * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
- tibble      * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
- tidyr       * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
- tidyverse   * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
+ package      * version date (UTC) lib source
+ dplyr        * 1.1.2   2023-04-20 [1] CRAN (R 4.3.0)
+ forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
+ GGally       * 2.1.2   2021-06-21 [1] CRAN (R 4.3.0)
+ ggplot2      * 3.4.2   2023-04-03 [1] CRAN (R 4.3.0)
+ kableExtra   * 1.3.4   2021-02-20 [1] CRAN (R 4.3.0)
+ knitr        * 1.43    2023-05-25 [1] CRAN (R 4.3.0)
+ lubridate    * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
+ patchwork    * 1.1.2   2022-08-19 [1] CRAN (R 4.3.0)
+ purrr        * 1.0.1   2023-01-10 [1] CRAN (R 4.3.0)
+ RColorBrewer * 1.1-3   2022-04-03 [1] CRAN (R 4.3.0)
+ readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
+ sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
+ skimr        * 2.1.5   2022-12-23 [1] CRAN (R 4.3.0)
+ stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
+ tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
+ tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
+ tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
 
  [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
 
