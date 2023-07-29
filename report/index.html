@@ -133,22 +133,29 @@ div.csl-indent {
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load weather and game data for Boston </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>boston_game_weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(bos_game_weather_html)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load sports venue data</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pro_sports_venues <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(venues_html)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># extract baseball parks</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>baseball_parks <span class="ot">&lt;-</span> pro_sports_venues <span class="sc">%&gt;%</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sport <span class="sc">==</span> <span class="st">"MLB"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># add info about open roof</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>baseball_parks<span class="sc">$</span>Open_Roof <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"No"</span>,<span class="fu">rep</span>(<span class="st">"Yes"</span>,<span class="dv">9</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"No"</span>,<span class="st">"Yes"</span>,<span class="st">"Yes"</span>,<span class="st">"Yes"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"No"</span>,<span class="st">"No"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">rep</span>(<span class="st">"Yes"</span>,<span class="dv">7</span>),<span class="st">"No"</span>,<span class="st">"Yes"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Yes"</span>,<span class="st">"No"</span>,<span class="st">"No"</span>,<span class="st">"No"</span>,<span class="st">"Yes"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create separate columns with day, month, and year corresponding</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to game dates; and create a binary win (1) or not (0) column</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>boston_game_weather <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year=</span><span class="fu">year</span>(date),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">month=</span><span class="fu">month</span>(date),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">day=</span><span class="fu">day</span>(date),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">wl_binary=</span><span class="fu">ifelse</span>(wl<span class="sc">==</span><span class="st">"W"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># load sports venue data</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>pro_sports_venues <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(venues_html)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># extract baseball parks</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>baseball_parks <span class="ot">&lt;-</span> pro_sports_venues <span class="sc">%&gt;%</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sport <span class="sc">==</span> <span class="st">"MLB"</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># load map data for US states minus AK and HI</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>states_df <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"state"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">!=</span> <span class="st">"alaska"</span> <span class="sc">|</span> region <span class="sc">!=</span> <span class="st">"hawaii"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># add info about open roof</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>baseball_parks<span class="sc">$</span>Open_Roof <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"No"</span>,<span class="fu">rep</span>(<span class="st">"Yes"</span>,<span class="dv">9</span>),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"No"</span>,<span class="st">"Yes"</span>,<span class="st">"Yes"</span>,<span class="st">"Yes"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"No"</span>,<span class="st">"No"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">rep</span>(<span class="st">"Yes"</span>,<span class="dv">7</span>),<span class="st">"No"</span>,<span class="st">"Yes"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Yes"</span>,<span class="st">"No"</span>,<span class="st">"No"</span>,<span class="st">"No"</span>,<span class="st">"Yes"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># load map data for US states minus AK and HI</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>states_df <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"state"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">!=</span> <span class="st">"alaska"</span> <span class="sc">|</span> region <span class="sc">!=</span> <span class="st">"hawaii"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="executive-summary" class="level2">
@@ -437,6 +444,10 @@ div.csl-indent {
 <th style="text-align: right;" data-quarto-table-cell-role="th">humid</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">precip</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">tempF</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">year</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">month</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">day</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">wl_binary</th>
 </tr>
 </thead>
 <tbody>
@@ -454,6 +465,10 @@ div.csl-indent {
 <td style="text-align: right;">80.2500</td>
 <td style="text-align: right;">18.29375</td>
 <td style="text-align: right;">53.06000</td>
+<td style="text-align: right;">1950</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1950-04-19</td>
@@ -469,6 +484,10 @@ div.csl-indent {
 <td style="text-align: right;">85.9375</td>
 <td style="text-align: right;">17.17500</td>
 <td style="text-align: right;">53.11625</td>
+<td style="text-align: right;">1950</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1950-04-19</td>
@@ -484,6 +503,10 @@ div.csl-indent {
 <td style="text-align: right;">85.9375</td>
 <td style="text-align: right;">17.17500</td>
 <td style="text-align: right;">53.11625</td>
+<td style="text-align: right;">1950</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1950-04-28</td>
@@ -499,6 +522,10 @@ div.csl-indent {
 <td style="text-align: right;">90.5625</td>
 <td style="text-align: right;">19.40625</td>
 <td style="text-align: right;">49.46001</td>
+<td style="text-align: right;">1950</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1950-04-30</td>
@@ -514,6 +541,10 @@ div.csl-indent {
 <td style="text-align: right;">85.3125</td>
 <td style="text-align: right;">21.54375</td>
 <td style="text-align: right;">45.12876</td>
+<td style="text-align: right;">1950</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">1</td>
 </tr>
 </tbody>
 </table>

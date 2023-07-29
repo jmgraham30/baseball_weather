@@ -38,6 +38,13 @@ bos_game_weather_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_
 
 # load weather and game data for Boston 
 boston_game_weather <- read_csv(bos_game_weather_html)
+# create separate columns with day, month, and year corresponding
+# to game dates; and create a binary win (1) or not (0) column
+boston_game_weather <- boston_game_weather %>%
+  mutate(year=year(date),
+         month=month(date),
+         day=day(date),
+         wl_binary=ifelse(wl=="W",1,0))
 # load sports venue data
 pro_sports_venues <- read_csv(venues_html)
 # extract baseball parks
