@@ -77,17 +77,25 @@ rb_2 <- boston_game_weather %>%
 
 r_2 <- (rb_1 + rb_2)
 
-boston_game_weather %>%
+w_1 <- boston_game_weather %>%
   ggplot(aes(x=humid)) + 
-  geom_histogram()
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Humidity",
+       y = "Count")
 
-boston_game_weather %>%
+w_2 <- boston_game_weather %>%
   ggplot(aes(x=tempF)) + 
-  geom_histogram()
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Temperature",
+       y = "Count")
 
-boston_game_weather %>%
+w_3 <- boston_game_weather %>%
   ggplot(aes(x=precip)) + 
-  geom_histogram()
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Precipitation",
+       y = "Count")
+
+(w_1 + w_2 + w_3)
 
 boston_game_weather %>%
   select(-c(hm_tm,dbl_hdr,vis_runs,score_diff,tempK,year,month,day,wl_binary)) %>%

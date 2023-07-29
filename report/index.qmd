@@ -254,7 +254,7 @@ ra_4 <- boston_game_weather %>%
 (ra_1 + ra_2) / (ra_4 + ra_3)
 ```
 
-### Potential Predictor Variables
+
 
 ```{r}
 #| message: false
@@ -275,6 +275,41 @@ rb_2 <- boston_game_weather %>%
 
 (rb_1 + rb_2)
 ```
+
+
+### Potential Predictor Variables
+
+
+#### Climate and Weather Variables
+
+```{r}
+#| message: false
+#| label: fig-weathers
+#| fig-cap: Exploratory plots for the climate and weather variables on dates of Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020).
+
+w_1 <- boston_game_weather %>%
+  ggplot(aes(x=humid)) + 
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Humidity",
+       y = "Count")
+
+w_2 <- boston_game_weather %>%
+  ggplot(aes(x=tempF)) + 
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Temperature",
+       y = "Count")
+
+w_3 <- boston_game_weather %>%
+  ggplot(aes(x=precip)) + 
+  geom_histogram(color="black",fill="lightblue") + 
+  labs(x = "Precipitation",
+       y = "Count")
+
+(w_1 + w_2 + w_3)
+```
+
+### Variable Relationships
+
 
 
 ## Models
