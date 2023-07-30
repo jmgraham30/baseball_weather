@@ -323,6 +323,21 @@ as_precip <- boston_game_weather %>%
 (as_date + as_temp) / (as_humid + as_precip)
 ```
 
+## Yearly Wins at Home
+
+```{r}
+#| message: false
+
+
+boston_game_weather %>%
+  group_by(year) %>%
+  summarise(wins_by_year=sum(wl_binary)) %>%
+  ggplot(aes(x=year,y=wins_by_year)) + 
+  geom_point(size=2,color="darkgreen") + 
+  geom_smooth(color="#512d6d",fill="lightblue") + 
+  labs(x="Year",y="Number of Wins")
+```
+
 ## Conclusions
 
 
