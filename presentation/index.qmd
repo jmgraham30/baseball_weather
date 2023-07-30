@@ -197,8 +197,131 @@ w_3 <- boston_game_weather %>%
 (w_1 + w_2 + w_3)
 ```
 
+## Red Sox Runs
+
+```{r}
+#| message: false
+
+hs_date <- boston_game_weather %>%
+  ggplot(aes(x=date,y=hm_runs)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Date",y="Red Sox runs")
+hs_temp <- boston_game_weather %>%
+  ggplot(aes(x=tempF,y=hm_runs)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Temperature (F)",y="Red Sox runs")
+hs_humid <- boston_game_weather %>%
+  ggplot(aes(x=humid,y=hm_runs)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Humidity",y="Red Sox runs")
+hs_precip <- boston_game_weather %>%
+  ggplot(aes(x=precip,y=hm_runs)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Precipitable Water",y="Red Sox runs")
+
+(hs_date + hs_temp) / (hs_humid + hs_precip)
+```
+
+## Red Sox Wins
+
+```{r}
+#| message: false
 
 
+ws_date <- boston_game_weather %>%
+  ggplot(aes(x=date,y=wl,color=wl)) + 
+  geom_point(size=2,alpha=0.2) + 
+  scale_color_manual(values = c("#E69F00","#009E73")) + 
+  theme(legend.position = "none") + 
+  labs(x="Date",y="Win/Not")
+ws_temp <- boston_game_weather %>%
+  ggplot(aes(x=tempF,y=wl,color=wl)) + 
+  geom_point(size=2,alpha=0.2) + 
+  scale_color_manual(values = c("#E69F00","#009E73")) +
+  labs(x="Temperature (F)",y="Win/Not", color="Win/Not")
+ws_humid <- boston_game_weather %>%
+  ggplot(aes(x=humid,y=wl,color=wl)) + 
+  geom_point(size=2,alpha=0.2) + 
+  scale_color_manual(values = c("#E69F00","#009E73")) +
+  theme(legend.position = "none") +
+  labs(x="Humidity",y="Win/Not")
+ws_precip <- boston_game_weather %>%
+  ggplot(aes(x=precip,y=wl,color=wl)) + 
+  geom_point(size=2,alpha=0.2) + 
+  scale_color_manual(values = c("#E69F00","#009E73")) +
+  theme(legend.position = "none") +
+  labs(x="Precipitable Water",y="Win/Not")
+
+(ws_date + ws_temp) / (ws_humid + ws_precip)
+```
+
+## Red Sox Game Duration
+
+```{r}
+#| message: false
+
+
+ds_date <- boston_game_weather %>%
+  ggplot(aes(x=date,y=duration)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Date",y="Red Sox runs")
+ds_temp <- boston_game_weather %>%
+  ggplot(aes(x=tempF,y=duration)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Temperature (F)",y="Red Sox runs")
+ds_humid <- boston_game_weather %>%
+  ggplot(aes(x=humid,y=duration)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Humidity",y="Red Sox runs")
+ds_precip <- boston_game_weather %>%
+  ggplot(aes(x=precip,y=duration)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Precipitable Water",y="Red Sox runs")
+
+(ds_date + ds_temp) / (ds_humid + ds_precip)
+```
+
+## Red Sox Game Attendance
+
+```{r}
+#| message: false
+
+
+as_date <- boston_game_weather %>%
+  filter(attendance > 0) %>%
+  ggplot(aes(x=date,y=attendance)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Date",y="Red Sox runs")
+as_temp <- boston_game_weather %>%
+  filter(attendance > 0) %>%
+  ggplot(aes(x=tempF,y=attendance)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Temperature (F)",y="Red Sox runs")
+as_humid <- boston_game_weather %>%
+  filter(attendance > 0) %>%
+  ggplot(aes(x=humid,y=attendance)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Humidity",y="Red Sox runs")
+as_precip <- boston_game_weather %>%
+  filter(attendance > 0) %>%
+  ggplot(aes(x=precip,y=attendance)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Precipitable Water",y="Red Sox runs")
+
+(as_date + as_temp) / (as_humid + as_precip)
+```
 
 ## Conclusions
 
