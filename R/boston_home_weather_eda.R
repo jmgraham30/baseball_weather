@@ -113,74 +113,73 @@ boston_game_weather %>%
   group_by(year) %>%
   summarise(wins_by_year=sum(wl_binary)) %>%
   ggplot(aes(x=year,y=wins_by_year)) + 
-  geom_point() + 
-  geom_smooth(method = "lm")
+  geom_point(size=2,color="darkgreen") + 
+  geom_smooth(method = "lm",color="#512d6d",fill="lightblue")
 
 boston_game_weather %>%
   ggplot(aes(x=date,y=humid)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=date,y=tempF)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=date,y=precip)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=date,y=humid)) + 
-  geom_point() + 
-  geom_smooth(method = "lm")
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(method = "lm",color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=date,y=tempF)) + 
-  geom_point() + 
-  geom_smooth(method = "lm")
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(method = "lm",color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=date,y=precip)) + 
-  geom_point() + 
-  geom_smooth(method = "lm")
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(method = "lm",color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   group_by(year) %>%
   summarise(yearly_avg_tempF=mean(tempF)) %>%
   ggplot(aes(x=year,y=yearly_avg_tempF)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="darkgreen") + 
+  geom_smooth(color="#512d6d",fill="lightblue")
 
 boston_game_weather %>%
   group_by(year) %>%
   summarise(yearly_avg_humid=mean(humid)) %>%
   ggplot(aes(x=year,y=yearly_avg_humid)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="darkgreen") + 
+  geom_smooth(color="#512d6d",fill="lightblue")
 
 boston_game_weather %>%
   group_by(year) %>%
   summarise(yearly_avg_precip=mean(precip)) %>%
   ggplot(aes(x=year,y=yearly_avg_precip)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="darkgreen") + 
+  geom_smooth(color="#512d6d",fill="lightblue")
 
 boston_game_weather %>%
   ggplot(aes(x=humid,y=hm_runs)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="darkgreen",alpha=0.5)
 
 boston_game_weather %>%
   ggplot(aes(x=tempF,y=hm_runs)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=precip,y=hm_runs)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=wl,y=hm_runs)) + 
@@ -188,62 +187,62 @@ boston_game_weather %>%
 
 boston_game_weather %>%
   ggplot(aes(x=wl,y=tempF)) + 
-  geom_boxplot()
+  geom_boxplot(color="#512d6d")
 
 boston_game_weather %>%
   ggplot(aes(x=wl,y=humid)) + 
-  geom_boxplot()
+  geom_boxplot(color="#512d6d")
 
 boston_game_weather %>%
   ggplot(aes(x=wl,y=precip)) + 
-  geom_boxplot()
+  geom_boxplot(color="#512d6d")
 
 boston_game_weather %>%
   ggplot(aes(x=humid,y=attendance)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=tempF,y=attendance)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=precip,y=attendance)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   filter(attendance > 0) %>%
   ggplot(aes(x=humid,y=attendance)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   filter(attendance > 0) %>%
   ggplot(aes(x=tempF,y=attendance)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   filter(attendance > 0) %>%
   ggplot(aes(x=precip,y=attendance)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 
 boston_game_weather %>%
   ggplot(aes(x=humid,y=duration)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=tempF,y=duration)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
 boston_game_weather %>%
   ggplot(aes(x=precip,y=duration)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen")
 
