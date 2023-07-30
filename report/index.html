@@ -247,7 +247,7 @@ div.csl-indent {
 <p>To address our primary question, we collected and combined two sets of data. The first data set collected contains information about each home game played by the Boston Red Sox at Fenway Park. The second data set collected contains weather data such as in Boston over the available time frame of games at Fenway.</p>
 <section id="team-data" class="level3">
 <h3 class="anchored" data-anchor-id="team-data">Team Data</h3>
-<p>To obtain the data on home games played by the Boston Red Sox at Fenway Park, we used the function <code>get_retrosheet</code> from the R package <code>retrosheet</code> to download game data for a specific year and team <span class="citation" data-cites="retrosheet_cite">(<a href="#ref-retrosheet_cite" role="doc-biblioref">Douglas and Scriven 2023</a>)</span>. Then, we used a function <code>team_games</code> to iterate over all the years that the Red Sox played at Fenway Park, that is, 1912 - 2022 (skipping 2020 due to the COVID-19 pandemic). The code to accomplish this is in the <code>team_home.R</code> script available at our baseball_weather GitHub repository, <a href="https://github.com/jmgraham30/baseball_weather">view the GitHub repo</a>.</p>
+<p>To obtain the data on home games played by the Boston Red Sox at Fenway Park, we used the function <code>get_retrosheet</code> from the R package <code>retrosheet</code> to download game data for a specific year and team <span class="citation" data-cites="retrosheet_cite">(<a href="#ref-retrosheet_cite" role="doc-biblioref">Douglas and Scriven 2023</a>)</span>. Then, we used a function <code>team_games</code> to iterate over all the years that the Red Sox played at Fenway Park, that is, 1912 - 2022 (skipping 2020 due to the COVID-19 pandemic). The code to accomplish this is in the <a href="https://github.com/jmgraham30/baseball_weather/blob/main/R/team_home.R"><code>team_home.R</code></a> script available at our baseball_weather GitHub repository, <a href="https://github.com/jmgraham30/baseball_weather">view the GitHub repo</a>.</p>
 <p>The <code>retrosheet</code> package contains a collection of tools to import and structure the single-season event, game-log, roster, and schedule data available from the <a href="https://www.retrosheet.org">Retrosheet website</a> which maintains play-by-play accounts of as many major league games as possible. The Retrosheet data we downloaded for the Boston Red Sox has a structure indicated by <a href="#tbl-boston-data">Table&nbsp;1</a>.</p>
 <div class="cell">
 <details>
@@ -407,7 +407,7 @@ div.csl-indent {
 
 </div>
 </div>
-<p>The data set contains 15,622 rows or observations. Note that the temperature, humidity, and precipitation values recorded are averaged daily and over a spatial region (between 41 and 42 degrees latitude and 289 and 290 degrees longitude). The code used to download the data is contained in the <code>boston_weather_get.R</code> script available our baseball_weather GitHub repository, <a href="https://github.com/jmgraham30/baseball_weather">view the GitHub repo</a>.</p>
+<p>The data set contains 15,622 rows or observations. Note that the temperature, humidity, and precipitation values recorded are averaged daily and over a spatial region (between 41 and 42 degrees latitude and 289 and 290 degrees longitude). The code used to download the data is contained in the <a href="https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_weather_get.R"><code>boston_weather_get.R</code></a> script available our baseball_weather GitHub repository, <a href="https://github.com/jmgraham30/baseball_weather">view the GitHub repo</a>.</p>
 </section>
 <section id="combined-weather-and-game-data" class="level3">
 <h3 class="anchored" data-anchor-id="combined-weather-and-game-data">Combined Weather and Game Data</h3>
@@ -416,7 +416,7 @@ div.csl-indent {
 <li><p>Climate and weather data is only available starting in the 1950’s while Boston Red Sox home grame data goes back to 1912. Thus, we must restrict the home game data to those observations starting in the 1950’s.</p></li>
 <li><p>The downloaded climate and weather data contains observations for many more days than just the days on which there were Red Sox home games. Thus, we must extract those climate and weather observatios corresponding to dates of games at Fenway.</p></li>
 </ul>
-<p>All the necessary data manipulations were accomplished through functions from the <code>dplyr</code> package <span class="citation" data-cites="dplyr_cite">(<a href="#ref-dplyr_cite" role="doc-biblioref">Wickham et al. 2023</a>)</span>. See the <code>boston_data_wrangling.R</code> script available our baseball_weather GitHub repository, <a href="https://github.com/jmgraham30/baseball_weather">view the GitHub repo</a>.</p>
+<p>All the necessary data manipulations were accomplished through functions from the <code>dplyr</code> package <span class="citation" data-cites="dplyr_cite">(<a href="#ref-dplyr_cite" role="doc-biblioref">Wickham et al. 2023</a>)</span>. See the <a href="https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_data_wrangling.R"><code>boston_data_wrangling.R</code></a> script available our baseball_weather GitHub repository, <a href="https://github.com/jmgraham30/baseball_weather">view the GitHub repo</a>.</p>
 <p>The combined weather game data for the Boston Red Sox home games at Fenway Park has a structure indicated by <a href="#tbl-boston-game-weather">Table&nbsp;3</a>.</p>
 <div class="cell">
 <details>
@@ -558,8 +558,10 @@ div.csl-indent {
 </section>
 <section id="exploratory-results" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-results">Exploratory Results</h2>
+<p>The script <a href="https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_home_weather_eda.R"><code>boston_home_weather_eda.R</code></a> contains the full exploratory analysis and all corresponding code.</p>
 <section id="potential-response-variables" class="level3">
 <h3 class="anchored" data-anchor-id="potential-response-variables">Potential Response Variables</h3>
+<p><a href="#fig-rep1-edas">Figure&nbsp;4</a></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -602,6 +604,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
+<p><a href="#fig-rep2-edas">Figure&nbsp;5</a></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -633,6 +636,7 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="potential-predictor-variables">Potential Predictor Variables</h3>
 <section id="climate-and-weather-variables" class="level4">
 <h4 class="anchored" data-anchor-id="climate-and-weather-variables">Climate and Weather Variables</h4>
+<p><a href="#fig-weathers">Figure&nbsp;6</a></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -726,7 +730,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-07-29
+ date     2023-07-30
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.433 @ /usr/local/bin/quarto
 

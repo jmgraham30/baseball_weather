@@ -142,7 +142,7 @@ To address our primary question, we collected and combined two sets of data. The
 
 ### Team Data
 
-To obtain the data on home games played by the Boston Red Sox at Fenway Park, we used the function `get_retrosheet` from the R package `retrosheet` to download game data for a specific year and team [@retrosheet_cite]. Then, we used a function `team_games` to iterate over all the years that the Red Sox played at Fenway Park, that is, 1912 - 2022 (skipping 2020 due to the COVID-19 pandemic). The code to accomplish this is in the `team_home.R` script available at our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather). 
+To obtain the data on home games played by the Boston Red Sox at Fenway Park, we used the function `get_retrosheet` from the R package `retrosheet` to download game data for a specific year and team [@retrosheet_cite]. Then, we used a function `team_games` to iterate over all the years that the Red Sox played at Fenway Park, that is, 1912 - 2022 (skipping 2020 due to the COVID-19 pandemic). The code to accomplish this is in the [`team_home.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/team_home.R) script available at our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather). 
 
 
 The `retrosheet` package contains a collection of tools to import and structure the single-season event, game-log, roster, and schedule data available from the [Retrosheet website](https://www.retrosheet.org) which maintains play-by-play accounts of as many major league games as possible. The Retrosheet data we downloaded for the Boston Red Sox has a structure indicated by @tbl-boston-data.
@@ -186,7 +186,7 @@ bos_weather %>%
 
 ```
 
-The data set contains 15,622 rows or observations. Note that the temperature, humidity, and precipitation values recorded are averaged daily and over a spatial region (between 41 and 42 degrees latitude and 289 and 290 degrees longitude). The code used to download the data is contained in the `boston_weather_get.R` script available our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather).
+The data set contains 15,622 rows or observations. Note that the temperature, humidity, and precipitation values recorded are averaged daily and over a spatial region (between 41 and 42 degrees latitude and 289 and 290 degrees longitude). The code used to download the data is contained in the [`boston_weather_get.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_weather_get.R) script available our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather).
 
 ### Combined Weather and Game Data
 
@@ -196,7 +196,7 @@ In order to address our initial research question, we combined the Boston weathe
 
 - The downloaded climate and weather data contains observations for many more days than just the days on which there were Red Sox home games. Thus, we must extract those climate and weather observatios corresponding to dates of games at Fenway.  
 
-All the necessary data manipulations were accomplished through functions from the `dplyr` package [@dplyr_cite]. See the `boston_data_wrangling.R` script available our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather).
+All the necessary data manipulations were accomplished through functions from the `dplyr` package [@dplyr_cite]. See the [`boston_data_wrangling.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_data_wrangling.R) script available our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather).
 
 
 The combined weather game data for the Boston Red Sox home games at Fenway Park has a structure indicated by @tbl-boston-game-weather.
