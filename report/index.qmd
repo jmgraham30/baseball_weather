@@ -7,6 +7,8 @@ format:
   html:
     code-fold: true
     echo: true
+    toc: true
+    toc-location: left
 bibliography: report_bib.bib
 ---
 
@@ -220,7 +222,7 @@ The script [`boston_home_weather_eda.R`](https://github.com/jmgraham30/baseball_
 
 ### Potential Response Variables
 
-@fig-rep1-edas
+@fig-rep1-edas shows the distributions of runs scored by the Red Sox and the visiting team, as well as the number of games and the difference in scores between the Red Sox and visiting teams. The median number of runs for Boston is 5 while the median number of runs for visitors is 4. 
 
 ```{r}
 #| message: false
@@ -258,7 +260,10 @@ ra_4 <- boston_game_weather %>%
 (ra_1 + ra_2) / (ra_4 + ra_3)
 ```
 
-@fig-rep2-edas
+We observe from @fig-rep1-edas that the Red Sox have won more games than they have lost and tend to win by a median of one run. 
+
+
+@fig-rep2-edas displays the distributions for the duration and attendance of Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020). The median duration for a game is 170 minutes while the median attendance is around thirty thousand. Note that Fenway Park currently seats over 37,000 [@wikipediaFenwayPark]. 
 
 ```{r}
 #| message: false
@@ -281,8 +286,34 @@ rb_2 <- boston_game_weather %>%
 ```
 
 
+One potentially important observation based on @fig-rep2-edas is that there are some Red Sox home games for which the recorded attendance is 0. Specifically, there are 243 such games. This value is determined using the following code:
+
+```{r}
+boston_game_weather %>%
+  filter(attendance == 0) %>%
+  nrow()
+```
+
+
+```{r}
+#| message: false
+#| label: fig-zero-attends
+#| fig-cap: The number of Red Sox home games by year with a recorded attendance of zero.
+
+boston_game_weather %>%
+  filter(attendance == 0) %>%
+  ggplot(aes(x=year)) + 
+  geom_bar(color="#512d6d",fill="lightblue") + 
+  labs(x="Year",y="Count",title="Observations with Zero Recorded Attendance")
+```
+
+It's not immediately clear why there may be a zero recorded for attendance at some games. This could be an error but further investigation is required to determine for certain. It might be necessary to remove those observations with zero attendance depending on what specific questions we decide to address with models. 
+
 ### Potential Predictor Variables
 
+Our main interest in this project is to examine how climate and weather factors impact aspects of baseball games such as the score, outcome, duration, and attendance games. As previously noted, we have data about humidity, precipitable water[^2], and temperature for the Red Sox home games.
+
+[^2]: Precipitable water is the amount of water potentially available in the atmosphere for precipitation, usually measured in a vertical column that extends from the Earth's surface to the upper edge of the troposphere.
 
 #### Climate and Weather Variables
 
@@ -313,6 +344,8 @@ w_3 <- boston_game_weather %>%
 
 (w_1 + w_2 + w_3)
 ```
+
+We see that the median temperature is about 65 degrees Fahrenheit, the median humidity is about 83 percent, and the median precipitable water is about 25 $\frac{\text{kg}}{\text{m}^2}$. 
 
 ### Variable Relationships
 

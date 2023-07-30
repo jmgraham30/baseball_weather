@@ -88,13 +88,46 @@ div.csl-indent {
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a>
+  <ul class="collapse">
+  <li><a href="#initial-research-question" id="toc-initial-research-question" class="nav-link" data-scroll-target="#initial-research-question">Initial Research Question</a></li>
+  <li><a href="#approach-to-research" id="toc-approach-to-research" class="nav-link" data-scroll-target="#approach-to-research">Approach to Research</a></li>
+  </ul></li>
+  <li><a href="#data-collection-and-documentation" id="toc-data-collection-and-documentation" class="nav-link" data-scroll-target="#data-collection-and-documentation">Data Collection and Documentation</a>
+  <ul class="collapse">
+  <li><a href="#team-data" id="toc-team-data" class="nav-link" data-scroll-target="#team-data">Team Data</a></li>
+  <li><a href="#weather-data" id="toc-weather-data" class="nav-link" data-scroll-target="#weather-data">Weather Data</a></li>
+  <li><a href="#combined-weather-and-game-data" id="toc-combined-weather-and-game-data" class="nav-link" data-scroll-target="#combined-weather-and-game-data">Combined Weather and Game Data</a></li>
+  </ul></li>
+  <li><a href="#exploratory-results" id="toc-exploratory-results" class="nav-link" data-scroll-target="#exploratory-results">Exploratory Results</a>
+  <ul class="collapse">
+  <li><a href="#potential-response-variables" id="toc-potential-response-variables" class="nav-link" data-scroll-target="#potential-response-variables">Potential Response Variables</a></li>
+  <li><a href="#potential-predictor-variables" id="toc-potential-predictor-variables" class="nav-link" data-scroll-target="#potential-predictor-variables">Potential Predictor Variables</a></li>
+  <li><a href="#variable-relationships" id="toc-variable-relationships" class="nav-link" data-scroll-target="#variable-relationships">Variable Relationships</a></li>
+  </ul></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
+  <li><a href="#model-results" id="toc-model-results" class="nav-link" data-scroll-target="#model-results">Model Results</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -561,7 +594,7 @@ div.csl-indent {
 <p>The script <a href="https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_home_weather_eda.R"><code>boston_home_weather_eda.R</code></a> contains the full exploratory analysis and all corresponding code.</p>
 <section id="potential-response-variables" class="level3">
 <h3 class="anchored" data-anchor-id="potential-response-variables">Potential Response Variables</h3>
-<p><a href="#fig-rep1-edas">Figure&nbsp;4</a></p>
+<p><a href="#fig-rep1-edas">Figure&nbsp;4</a> shows the distributions of runs scored by the Red Sox and the visiting team, as well as the number of games and the difference in scores between the Red Sox and visiting teams. The median number of runs for Boston is 5 while the median number of runs for visitors is 4.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -604,7 +637,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p><a href="#fig-rep2-edas">Figure&nbsp;5</a></p>
+<p>We observe from <a href="#fig-rep1-edas">Figure&nbsp;4</a> that the Red Sox have won more games than they have lost and tend to win by a median of one run.</p>
+<p><a href="#fig-rep2-edas">Figure&nbsp;5</a> displays the distributions for the duration and attendance of Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020). The median duration for a game is 170 minutes while the median attendance is around thirty thousand. Note that Fenway Park currently seats over 37,000 <span class="citation" data-cites="wikipediaFenwayPark">(<a href="#ref-wikipediaFenwayPark" role="doc-biblioref"><span>“<span>F</span>enway <span>P</span>ark - <span>W</span>ikipedia — En.wikipedia.org”</span></a>)</span>.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -631,44 +665,77 @@ div.csl-indent {
 </div>
 </div>
 </div>
-</section>
-<section id="potential-predictor-variables" class="level3">
-<h3 class="anchored" data-anchor-id="potential-predictor-variables">Potential Predictor Variables</h3>
-<section id="climate-and-weather-variables" class="level4">
-<h4 class="anchored" data-anchor-id="climate-and-weather-variables">Climate and Weather Variables</h4>
-<p><a href="#fig-weathers">Figure&nbsp;6</a></p>
+<p>One potentially important observation based on <a href="#fig-rep2-edas">Figure&nbsp;5</a> is that there are some Red Sox home games for which the recorded attendance is 0. Specifically, there are 243 such games. This value is determined using the following code:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>w_1 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>humid)) <span class="sc">+</span> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Humidity"</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>w_2 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>tempF)) <span class="sc">+</span> </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Temperature"</span>,</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>w_3 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>precip)) <span class="sc">+</span> </span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Precipitation"</span>,</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>(w_1 <span class="sc">+</span> w_2 <span class="sc">+</span> w_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(attendance <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 243</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(attendance <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>year)) <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>,<span class="at">y=</span><span class="st">"Count"</span>,<span class="at">title=</span><span class="st">"Observations with Zero Recorded Attendance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-zero-attends" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-zero-attends-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: The number of Red Sox home games by year with a recorded attendance of zero.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>It’s not immediately clear why there may be a zero recorded for attendance at some games. This could be an error but further investigation is required to determine for certain. It might be necessary to remove those observations with zero attendance depending on what specific questions we decide to address with models.</p>
+</section>
+<section id="potential-predictor-variables" class="level3">
+<h3 class="anchored" data-anchor-id="potential-predictor-variables">Potential Predictor Variables</h3>
+<p>Our main interest in this project is to examine how climate and weather factors impact aspects of baseball games such as the score, outcome, duration, and attendance games. As previously noted, we have data about humidity, precipitable water<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, and temperature for the Red Sox home games.</p>
+<section id="climate-and-weather-variables" class="level4">
+<h4 class="anchored" data-anchor-id="climate-and-weather-variables">Climate and Weather Variables</h4>
+<p><a href="#fig-weathers">Figure&nbsp;7</a></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>w_1 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>humid)) <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Humidity"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>w_2 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>tempF)) <span class="sc">+</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Temperature"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>w_3 <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>precip)) <span class="sc">+</span> </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Precipitation"</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>(w_1 <span class="sc">+</span> w_2 <span class="sc">+</span> w_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-weathers" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="index_files/figure-html/fig-weathers-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;6: Exploratory plots for the climate and weather variables on dates of Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020).</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7: Exploratory plots for the climate and weather variables on dates of Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020).</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>We see that the median temperature is about 65 degrees Fahrenheit, the median humidity is about 83 percent, and the median precipitable water is about 25 <span class="math inline">\(\frac{\text{kg}}{\text{m}^2}\)</span>.</p>
 </section>
 </section>
 <section id="variable-relationships" class="level3">
@@ -769,6 +836,7 @@ Expand for Session Info
 
 <ol>
 <li id="fn1"><p>By “open-air” we mean permanently open with no option for roof cover. Stadiums with either a fixed or retractable roof are not considered to be open-air for our purposes.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Precipitable water is the amount of water potentially available in the atmosphere for precipitation, usually measured in a vertical column that extends from the Earth’s surface to the upper edge of the troposphere.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
