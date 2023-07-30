@@ -349,6 +349,8 @@ We see that the median temperature is about 65 degrees Fahrenheit, the median hu
 
 ### Variable Relationships
 
+We would like to determine what if any impact there has been on the score, outcome, duration, or attendance of Red Sox games over time by temperature, humidity, or precipitable water.
+
 
 
 ## Models
