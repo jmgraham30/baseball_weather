@@ -216,7 +216,11 @@ This is our principal data set and it contains 5,727 rows.
 
 ## Exploratory Results
 
+The script [`boston_home_weather_eda.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_home_weather_eda.R) contains the full exploratory analysis and all corresponding code.
+
 ### Potential Response Variables
+
+@fig-rep1-edas
 
 ```{r}
 #| message: false
@@ -254,7 +258,7 @@ ra_4 <- boston_game_weather %>%
 (ra_1 + ra_2) / (ra_4 + ra_3)
 ```
 
-
+@fig-rep2-edas
 
 ```{r}
 #| message: false
@@ -281,6 +285,8 @@ rb_2 <- boston_game_weather %>%
 
 
 #### Climate and Weather Variables
+
+@fig-weathers
 
 ```{r}
 #| message: false
