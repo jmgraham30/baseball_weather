@@ -206,22 +206,22 @@ hs_date <- boston_game_weather %>%
   ggplot(aes(x=date,y=hm_runs)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Date",y="Red Sox runs")
+  labs(x="Date",y="Red Sox Runs")
 hs_temp <- boston_game_weather %>%
   ggplot(aes(x=tempF,y=hm_runs)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Temperature (F)",y="Red Sox runs")
+  labs(x="Temperature (F)",y="Red Sox Runs")
 hs_humid <- boston_game_weather %>%
   ggplot(aes(x=humid,y=hm_runs)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Humidity",y="Red Sox runs")
+  labs(x="Humidity",y="Red Sox Runs")
 hs_precip <- boston_game_weather %>%
   ggplot(aes(x=precip,y=hm_runs)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Precipitable Water",y="Red Sox runs")
+  labs(x="Precipitable Water",y="Red Sox Runs")
 
 (hs_date + hs_temp) / (hs_humid + hs_precip)
 ```
@@ -269,22 +269,22 @@ ds_date <- boston_game_weather %>%
   ggplot(aes(x=date,y=duration)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Date",y="Red Sox runs")
+  labs(x="Date",y="Game Duration")
 ds_temp <- boston_game_weather %>%
   ggplot(aes(x=tempF,y=duration)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Temperature (F)",y="Red Sox runs")
+  labs(x="Temperature (F)",y="Game Duration")
 ds_humid <- boston_game_weather %>%
   ggplot(aes(x=humid,y=duration)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Humidity",y="Red Sox runs")
+  labs(x="Humidity",y="Game Duration")
 ds_precip <- boston_game_weather %>%
   ggplot(aes(x=precip,y=duration)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Precipitable Water",y="Red Sox runs")
+  labs(x="Precipitable Water",y="Game Duration")
 
 (ds_date + ds_temp) / (ds_humid + ds_precip)
 ```
@@ -300,25 +300,25 @@ as_date <- boston_game_weather %>%
   ggplot(aes(x=date,y=attendance)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Date",y="Red Sox runs")
+  labs(x="Date",y="Game Attendance")
 as_temp <- boston_game_weather %>%
   filter(attendance > 0) %>%
   ggplot(aes(x=tempF,y=attendance)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Temperature (F)",y="Red Sox runs")
+  labs(x="Temperature (F)",y="Game Attendance")
 as_humid <- boston_game_weather %>%
   filter(attendance > 0) %>%
   ggplot(aes(x=humid,y=attendance)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Humidity",y="Red Sox runs")
+  labs(x="Humidity",y="Game Attendance")
 as_precip <- boston_game_weather %>%
   filter(attendance > 0) %>%
   ggplot(aes(x=precip,y=attendance)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Precipitable Water",y="Red Sox runs")
+  labs(x="Precipitable Water",y="Game Attendance")
 
 (as_date + as_temp) / (as_humid + as_precip)
 ```
