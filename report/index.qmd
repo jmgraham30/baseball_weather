@@ -519,10 +519,12 @@ boston_game_weather %>%
 We observe that from around 2003 to 2009, the Red Sox where consistently winning a large number of games. This could relate to our earlier observation regarding the time period of consistently high game attendance observed in @fig-attend.
 
 
+@fig-weather-time shows the change in the both the daily and yearly average climate and weather variables over time. 
+
 ```{r}
 #| message: false
 #| label: fig-weather-time
-#| fig-cap: Weather stuff
+#| fig-cap: Plots showing the change in the climate and weather variables over time. 
 
 
 wa_temp <- boston_game_weather %>%
@@ -566,6 +568,9 @@ wb_precip <- boston_game_weather %>%
 
 (wa_temp + wb_temp) / (wa_humid + wb_humid) / (wa_precip + wb_precip)
 ```
+
+
+It appears that there may be some temporal trends in the climate and weather variables over time. In order to explore more about how the climate and weather over time may have an impact on the score, outcome, duration, or attendance of Red Sox home games, we will need to develop an appropriate model and assess it's predictive accuracy.  
 
 ## Models
 
