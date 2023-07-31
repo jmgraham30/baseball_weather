@@ -84,7 +84,7 @@ ggplot() +
                aes(long,lat,group=group),
                fill="white",color="darkgrey") + 
   geom_point(data=baseball_parks,aes(x=Longitude,y=Latitude,color=Open_Roof),
-             size=2.5,alpha=0.5) +
+             size=2.5,alpha=0.6) +
   scale_color_manual(values=c("orange","#512d6d")) + 
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
@@ -118,7 +118,7 @@ ggplot() +
                aes(long,lat,group=group),
                fill="white",color="darkgrey") + 
   geom_point(data=baseball_parks,aes(x=Longitude,y=Latitude,color=Open_Roof),
-             size=2.5,alpha=0.5) +
+             size=2.5,alpha=0.6) +
   geom_point(data=baseball_parks %>% filter(Abbreviation == "BOS"),
                                             aes(x=Longitude,y=Latitude),size=5,color="#512d6d") + 
   geom_label( 
