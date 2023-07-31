@@ -420,8 +420,9 @@ ws_precip <- boston_game_weather %>%
 (ws_date + ws_temp) / (ws_humid + ws_precip)
 ```
 
+Again, it is difficult to see any clear pattern of influence that date, temperature, humidity, or precipitable water have on whether the Red Sox win at home games over the specified period of time.
 
-@fig-duration shows ... 
+@fig-duration shows the duration of games for the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.
 
 ```{r}
 #| message: false
@@ -453,8 +454,9 @@ ds_precip <- boston_game_weather %>%
 (ds_date + ds_temp) / (ds_humid + ds_precip)
 ```
 
+We clearly see that the duration of games has generally increased from 1950 to 2022. However, it is difficult to see any clear pattern of influence that temperature, humidity, or precipitable water have on whether the duration of Red Sox home games. 
 
-@fig-attend shows ... 
+@fig-attend shows the attendance of games for the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.
 
 ```{r}
 #| message: false
@@ -490,6 +492,11 @@ as_precip <- boston_game_weather %>%
 (as_date + as_temp) / (as_humid + as_precip)
 ```
 
+We clearly see that the attendance of games has generally increased from 1950 to 2022. Further, it also appears that attendance increases with is that of temperature, humidity, and precipitable water. Some additional observations include
+
+1) It appears that over time, the variance of game attendance has decreased, and there is a period of time (roughly 2005-2010) that the variance of game attendance is very low relative to other years. It is potentially interesting to determine a potential cause for this since it suggests that the Red Sox games where consistently well-attended during that time.
+
+2) 
 
 @fig-yearly-wins shows ...
 
