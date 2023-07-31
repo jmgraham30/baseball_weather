@@ -702,7 +702,7 @@ div.csl-indent {
 <p>Our main interest in this project is to examine how climate and weather factors impact aspects of baseball games such as the score, outcome, duration, and attendance games. As previously noted, we have data about humidity, precipitable water<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, and temperature for the Red Sox home games.</p>
 <section id="climate-and-weather-variables" class="level4">
 <h4 class="anchored" data-anchor-id="climate-and-weather-variables">Climate and Weather Variables</h4>
-<p><a href="#fig-weathers">Figure&nbsp;7</a></p>
+<p><a href="#fig-weathers">Figure&nbsp;7</a> show the distributions for humidity (as a percent), temperature (in degrees Fahrenheit), and precipitable water (in units of <span class="math inline">\(\frac{\text{kg}}{\text{m}^2}\)</span>).</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -741,7 +741,7 @@ div.csl-indent {
 <section id="variable-relationships" class="level3">
 <h3 class="anchored" data-anchor-id="variable-relationships">Variable Relationships</h3>
 <p>We would like to determine what if any impact there has been on the score, outcome, duration, or attendance of Red Sox games over time by temperature, humidity, or precipitable water.</p>
-<p><a href="#fig-runs">Figure&nbsp;8</a> shows …</p>
+<p><a href="#fig-runs">Figure&nbsp;8</a> shows the number of runs scored by the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -749,22 +749,22 @@ div.csl-indent {
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date,<span class="at">y=</span>hm_runs)) <span class="sc">+</span> </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Date"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Date"</span>,<span class="at">y=</span><span class="st">"Red Sox Runs"</span>)</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>hs_temp <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>tempF,<span class="at">y=</span>hm_runs)) <span class="sc">+</span> </span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Temperature (F)"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Temperature (F)"</span>,<span class="at">y=</span><span class="st">"Red Sox Runs"</span>)</span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>hs_humid <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>humid,<span class="at">y=</span>hm_runs)) <span class="sc">+</span> </span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Humidity"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Humidity"</span>,<span class="at">y=</span><span class="st">"Red Sox Runs"</span>)</span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>hs_precip <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>precip,<span class="at">y=</span>hm_runs)) <span class="sc">+</span> </span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Precipitable Water"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Precipitable Water"</span>,<span class="at">y=</span><span class="st">"Red Sox Runs"</span>)</span>
 <span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>(hs_date <span class="sc">+</span> hs_temp) <span class="sc">/</span> (hs_humid <span class="sc">+</span> hs_precip)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -777,7 +777,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p><a href="#fig-wins">Figure&nbsp;9</a> shows …</p>
+<p>Here it is difficult to see any clear pattern of influence that date, temperature, humidity, or precipitable water have on the number of runs the Red Sox score at home games over the specified period of time. We observe that there are potential outliers in each of the plots in <a href="#fig-runs">Figure&nbsp;8</a>.</p>
+<p><a href="#fig-wins">Figure&nbsp;9</a> shows shows the wins for the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -824,22 +825,22 @@ div.csl-indent {
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date,<span class="at">y=</span>duration)) <span class="sc">+</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Date"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Date"</span>,<span class="at">y=</span><span class="st">"Game Duration"</span>)</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ds_temp <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>tempF,<span class="at">y=</span>duration)) <span class="sc">+</span> </span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Temperature (F)"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Temperature (F)"</span>,<span class="at">y=</span><span class="st">"Game Duration"</span>)</span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>ds_humid <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>humid,<span class="at">y=</span>duration)) <span class="sc">+</span> </span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Humidity"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Humidity"</span>,<span class="at">y=</span><span class="st">"Game Duration"</span>)</span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>ds_precip <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>precip,<span class="at">y=</span>duration)) <span class="sc">+</span> </span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Precipitable Water"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Precipitable Water"</span>,<span class="at">y=</span><span class="st">"Game Duration"</span>)</span>
 <span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>(ds_date <span class="sc">+</span> ds_temp) <span class="sc">/</span> (ds_humid <span class="sc">+</span> ds_precip)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -861,25 +862,25 @@ div.csl-indent {
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date,<span class="at">y=</span>attendance)) <span class="sc">+</span> </span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Date"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Date"</span>,<span class="at">y=</span><span class="st">"Game Attendance"</span>)</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>as_temp <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(attendance <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>tempF,<span class="at">y=</span>attendance)) <span class="sc">+</span> </span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Temperature (F)"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Temperature (F)"</span>,<span class="at">y=</span><span class="st">"Game Attendance"</span>)</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>as_humid <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(attendance <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>humid,<span class="at">y=</span>attendance)) <span class="sc">+</span> </span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Humidity"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Humidity"</span>,<span class="at">y=</span><span class="st">"Game Attendance"</span>)</span>
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>as_precip <span class="ot">&lt;-</span> boston_game_weather <span class="sc">%&gt;%</span></span>
 <span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(attendance <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>precip,<span class="at">y=</span>attendance)) <span class="sc">+</span> </span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"lightblue"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">"#512d6d"</span>,<span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span> </span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Precipitable Water"</span>,<span class="at">y=</span><span class="st">"Red Sox runs"</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Precipitable Water"</span>,<span class="at">y=</span><span class="st">"Game Attendance"</span>)</span>
 <span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>(as_date <span class="sc">+</span> as_temp) <span class="sc">/</span> (as_humid <span class="sc">+</span> as_precip)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>

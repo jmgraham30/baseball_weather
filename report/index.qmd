@@ -317,7 +317,7 @@ Our main interest in this project is to examine how climate and weather factors 
 
 #### Climate and Weather Variables
 
-@fig-weathers
+@fig-weathers show the distributions for humidity (as a percent), temperature (in degrees Fahrenheit), and precipitable water (in units of $\frac{\text{kg}}{\text{m}^2}$). 
 
 ```{r}
 #| message: false
@@ -351,7 +351,7 @@ We see that the median temperature is about 65 degrees Fahrenheit, the median hu
 
 We would like to determine what if any impact there has been on the score, outcome, duration, or attendance of Red Sox games over time by temperature, humidity, or precipitable water.
 
-@fig-runs shows ... 
+@fig-runs shows the number of runs scored by the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.
 
 ```{r}
 #| message: false
@@ -363,28 +363,29 @@ hs_date <- boston_game_weather %>%
   ggplot(aes(x=date,y=hm_runs)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Date",y="Red Sox runs")
+  labs(x="Date",y="Red Sox Runs")
 hs_temp <- boston_game_weather %>%
   ggplot(aes(x=tempF,y=hm_runs)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Temperature (F)",y="Red Sox runs")
+  labs(x="Temperature (F)",y="Red Sox Runs")
 hs_humid <- boston_game_weather %>%
   ggplot(aes(x=humid,y=hm_runs)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Humidity",y="Red Sox runs")
+  labs(x="Humidity",y="Red Sox Runs")
 hs_precip <- boston_game_weather %>%
   ggplot(aes(x=precip,y=hm_runs)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Precipitable Water",y="Red Sox runs")
+  labs(x="Precipitable Water",y="Red Sox Runs")
 
 (hs_date + hs_temp) / (hs_humid + hs_precip)
 ```
 
+Here it is difficult to see any clear pattern of influence that date, temperature, humidity, or precipitable water have on the number of runs the Red Sox score at home games over the specified period of time.  We observe that there are potential outliers in each of the plots in @fig-runs.
 
-@fig-wins shows ... 
+@fig-wins shows shows the wins for the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.
 
 ```{r}
 #| message: false
@@ -432,22 +433,22 @@ ds_date <- boston_game_weather %>%
   ggplot(aes(x=date,y=duration)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Date",y="Red Sox runs")
+  labs(x="Date",y="Game Duration")
 ds_temp <- boston_game_weather %>%
   ggplot(aes(x=tempF,y=duration)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Temperature (F)",y="Red Sox runs")
+  labs(x="Temperature (F)",y="Game Duration")
 ds_humid <- boston_game_weather %>%
   ggplot(aes(x=humid,y=duration)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Humidity",y="Red Sox runs")
+  labs(x="Humidity",y="Game Duration")
 ds_precip <- boston_game_weather %>%
   ggplot(aes(x=precip,y=duration)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Precipitable Water",y="Red Sox runs")
+  labs(x="Precipitable Water",y="Game Duration")
 
 (ds_date + ds_temp) / (ds_humid + ds_precip)
 ```
@@ -466,25 +467,25 @@ as_date <- boston_game_weather %>%
   ggplot(aes(x=date,y=attendance)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Date",y="Red Sox runs")
+  labs(x="Date",y="Game Attendance")
 as_temp <- boston_game_weather %>%
   filter(attendance > 0) %>%
   ggplot(aes(x=tempF,y=attendance)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Temperature (F)",y="Red Sox runs")
+  labs(x="Temperature (F)",y="Game Attendance")
 as_humid <- boston_game_weather %>%
   filter(attendance > 0) %>%
   ggplot(aes(x=humid,y=attendance)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Humidity",y="Red Sox runs")
+  labs(x="Humidity",y="Game Attendance")
 as_precip <- boston_game_weather %>%
   filter(attendance > 0) %>%
   ggplot(aes(x=precip,y=attendance)) + 
   geom_point(size=2,color="lightblue",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="darkgreen") + 
-  labs(x="Precipitable Water",y="Red Sox runs")
+  labs(x="Precipitable Water",y="Game Attendance")
 
 (as_date + as_temp) / (as_humid + as_precip)
 ```
