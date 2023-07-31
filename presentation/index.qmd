@@ -338,6 +338,55 @@ boston_game_weather %>%
   labs(x="Year",y="Number of Wins")
 ```
 
+## Weather Over Time
+
+```{r}
+#| message: false
+
+
+wa_temp <- boston_game_weather %>%
+  ggplot(aes(x=date,y=tempF)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Date",y="Temperature")
+wb_temp <- boston_game_weather %>%
+  group_by(year) %>%
+  summarise(mean_temp=mean(tempF)) %>%
+  ggplot(aes(x=year,y=mean_temp)) + 
+  geom_point(size=2,color="darkgreen",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="lightblue") + 
+  labs(x="Year",y="Mean Temperature")
+
+wa_humid <- boston_game_weather %>%
+  ggplot(aes(x=date,y=humid)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Date",y="Humidity")
+wb_humid <- boston_game_weather %>%
+  group_by(year) %>%
+  summarise(mean_humid=mean(humid)) %>%
+  ggplot(aes(x=year,y=mean_humid)) + 
+  geom_point(size=2,color="darkgreen",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="lightblue") + 
+  labs(x="Year",y="Mean Humidity")
+
+wa_precip <- boston_game_weather %>%
+  ggplot(aes(x=date,y=precip)) + 
+  geom_point(size=2,color="lightblue",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="darkgreen") + 
+  labs(x="Date",y="Percipitable Water")
+wb_precip <- boston_game_weather %>%
+  group_by(year) %>%
+  summarise(mean_precip=mean(precip)) %>%
+  ggplot(aes(x=year,y=mean_precip)) + 
+  geom_point(size=2,color="darkgreen",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="lightblue") + 
+  labs(x="Year",y="Mean Percipitable Water")
+
+(wa_temp + wa_humid + wa_precip) / (wb_temp + wb_humid + wb_precip) 
+```
+
+
 ## Conclusions
 
 
