@@ -113,12 +113,13 @@ div.csl-indent {
   <li><a href="#weather-data" id="toc-weather-data" class="nav-link" data-scroll-target="#weather-data">Weather Data</a></li>
   <li><a href="#combined-weather-and-game-data" id="toc-combined-weather-and-game-data" class="nav-link" data-scroll-target="#combined-weather-and-game-data">Combined Weather and Game Data</a></li>
   </ul></li>
-  <li><a href="#exploratory-results" id="toc-exploratory-results" class="nav-link" data-scroll-target="#exploratory-results">Exploratory Results</a>
+  <li><a href="#exploratory-analysis-and-results" id="toc-exploratory-analysis-and-results" class="nav-link" data-scroll-target="#exploratory-analysis-and-results">Exploratory Analysis and Results</a>
   <ul class="collapse">
   <li><a href="#potential-response-variables" id="toc-potential-response-variables" class="nav-link" data-scroll-target="#potential-response-variables">Potential Response Variables</a></li>
   <li><a href="#potential-predictor-variables" id="toc-potential-predictor-variables" class="nav-link" data-scroll-target="#potential-predictor-variables">Potential Predictor Variables</a></li>
   <li><a href="#variable-relationships" id="toc-variable-relationships" class="nav-link" data-scroll-target="#variable-relationships">Variable Relationships</a></li>
   </ul></li>
+  <li><a href="#further-exploratory-analysis" id="toc-further-exploratory-analysis" class="nav-link" data-scroll-target="#further-exploratory-analysis">Further Exploratory Analysis</a></li>
   <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
   <li><a href="#model-results" id="toc-model-results" class="nav-link" data-scroll-target="#model-results">Model Results</a></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
@@ -589,8 +590,8 @@ div.csl-indent {
 <p>This is our principal data set and it contains 5,727 rows.</p>
 </section>
 </section>
-<section id="exploratory-results" class="level2">
-<h2 class="anchored" data-anchor-id="exploratory-results">Exploratory Results</h2>
+<section id="exploratory-analysis-and-results" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-analysis-and-results">Exploratory Analysis and Results</h2>
 <p>The script <a href="https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_home_weather_eda.R"><code>boston_home_weather_eda.R</code></a> contains the full exploratory analysis and all corresponding code.</p>
 <section id="potential-response-variables" class="level3">
 <h3 class="anchored" data-anchor-id="potential-response-variables">Potential Response Variables</h3>
@@ -817,7 +818,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p><a href="#fig-duration">Figure&nbsp;10</a> shows …</p>
+<p>Again, it is difficult to see any clear pattern of influence that date, temperature, humidity, or precipitable water have on whether the Red Sox win at home games over the specified period of time.</p>
+<p><a href="#fig-duration">Figure&nbsp;10</a> shows the duration of games for the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -853,7 +855,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p><a href="#fig-attend">Figure&nbsp;11</a> shows …</p>
+<p>We clearly see that the duration of games has generally increased from 1950 to 2022. However, it is difficult to see any clear pattern of influence that temperature, humidity, or precipitable water have on whether the duration of Red Sox home games.</p>
+<p><a href="#fig-attend">Figure&nbsp;11</a> shows the attendance of games for the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -893,7 +896,16 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p><a href="#fig-yearly-wins">Figure&nbsp;12</a> shows …</p>
+<p>We clearly see that the attendance of games has generally increased from 1950 to 2022. Further, it also appears that attendance increases with is that of temperature, humidity, and precipitable water. Some additional points include:</p>
+<ol type="1">
+<li><p>It appears that over time, the variance of game attendance has decreased, and there is a period of time (roughly 2005-2010) that the variance of game attendance is very low relative to other years. It is potentially interesting to determine a potential cause for this since it suggests that the Red Sox games where consistently well-attended during that time.</p></li>
+<li><p>While attendance appears to increase with increasing temperature, humidity, and precipitable water it is unlikely that an increase in temperature, humidity, or precipitable water <em>causes</em> more people to attend Red Sox home games. For example, attendance might be increasing over time for any number of reasons and perhaps temperature, humidity, and precipitable water are increasing with time. Further exploratory analysis might provide insight on this.</p></li>
+</ol>
+</section>
+</section>
+<section id="further-exploratory-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="further-exploratory-analysis">Further Exploratory Analysis</h2>
+<p><a href="#fig-yearly-wins">Figure&nbsp;12</a> shows the <em>average</em> number of home game wins per year for the Red Sox.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -914,7 +926,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-</section>
+<p>We observe that from around 2003 to 2009, the Red Sox where consistently winning a large number of games. This could relate to our earlier observation regarding the time period of consistently high game attendance observed in <a href="#fig-attend">Figure&nbsp;11</a>.</p>
 </section>
 <section id="models" class="level2">
 <h2 class="anchored" data-anchor-id="models">Models</h2>

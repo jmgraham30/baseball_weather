@@ -216,7 +216,7 @@ boston_game_weather %>%
 
 This is our principal data set and it contains 5,727 rows.
 
-## Exploratory Results
+## Exploratory Analysis and Results
 
 The script [`boston_home_weather_eda.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_home_weather_eda.R) contains the full exploratory analysis and all corresponding code.
 
@@ -492,13 +492,15 @@ as_precip <- boston_game_weather %>%
 (as_date + as_temp) / (as_humid + as_precip)
 ```
 
-We clearly see that the attendance of games has generally increased from 1950 to 2022. Further, it also appears that attendance increases with is that of temperature, humidity, and precipitable water. Some additional observations include
+We clearly see that the attendance of games has generally increased from 1950 to 2022. Further, it also appears that attendance increases with is that of temperature, humidity, and precipitable water. Some additional points include:
 
 1) It appears that over time, the variance of game attendance has decreased, and there is a period of time (roughly 2005-2010) that the variance of game attendance is very low relative to other years. It is potentially interesting to determine a potential cause for this since it suggests that the Red Sox games where consistently well-attended during that time.
 
-2) 
+2) While attendance appears to increase with increasing temperature, humidity, and precipitable water it is unlikely that an increase in temperature, humidity, or precipitable water *causes* more people to attend Red Sox home games. For example, attendance might be increasing over time for any number of reasons and perhaps temperature, humidity, and precipitable water are increasing with time. Further exploratory analysis might provide insight on this. 
 
-@fig-yearly-wins shows ...
+## Further Exploratory Analysis
+
+@fig-yearly-wins shows the *average* number of home game wins per year for the Red Sox.  
 
 ```{r}
 #| message: false
@@ -513,6 +515,8 @@ boston_game_weather %>%
   geom_smooth(color="#512d6d",fill="lightblue") + 
   labs(x="Year",y="Number of Wins")
 ```
+
+We observe that from around 2003 to 2009, the Red Sox where consistently winning a large number of games. This could relate to our earlier observation regarding the time period of consistently high game attendance observed in @fig-attend.
 
 ## Models
 
