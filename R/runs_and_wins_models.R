@@ -69,3 +69,73 @@ ggplot(boot_aug, aes(vis_runs, wl_binary)) +
   labs(x="Number of Visitor Runs Scores", y="Win Likelihood",
        color="Win/Loss")
 
+
+
+
+
+############################ Useless ##############################
+
+# create test/train splits
+boston_split <- initial_split(boston_game_weather, strata = year)
+boston_train <- training(boston_split)
+boston_test <- testing(boston_split)
+# create cv folds
+boston_folds <- vfold_cv(boston_train)
+# define model specification
+tree_spec <- decision_tree(
+  cost_complexity = tune(),
+  tree_depth = tune(),
+  min_n = tune()) %>%
+  set_engine("rpart") %>%
+  set_mode("regression")
+# create tuning grid for hyperparameters
+tree_grid <- grid_regular(cost_complexity(), 
+                          tree_depth(), 
+                          min_n(),
+                          levels = 10)
+# set up workflow
+boston_recipe <- recipe(hm_runs ~ humid + precip + tempF, data = boston_train)
+
+boston_wf <- workflow() %>%
+  add_recipe(boston_recipe)
+# tune
+tree_rs <- boston_wf %>%
+  add_model(tree_spec) %>%
+  tune_grid(resamples = boston_folds,
+            grid = tree_grid,
+            metrics = metric_set(rmse,mae)
+  )
+
+autoplot(tree_rs)
+
+show_best(tree_rs, "rmse")
+
+select_best(tree_rs, "rmse")
+
+show_best(tree_rs, "mae")
+
+select_best(tree_rs, "mae")
+
+final_tree <- finalize_model(tree_spec, select_best(tree_rs, "mae"))
+
+final_tree_fit <- fit(final_tree, hm_runs ~ humid + precip + tempF, boston_train)
+
+final_tree_fit %>%
+  vip(geom = "col", aesthetics = list(fill = "midnightblue", alpha = 0.8)) +
+  scale_y_continuous(expand = c(0, 0))
+
+# refit with just two predictors
+ex_fit <- fit(final_tree,hm_runs ~ tempF + precip, boston_train)
+
+
+boston_train %>%
+  ggplot(aes(x=tempF,y=precip)) + 
+  geom_parttree(data=ex_fit,aes(fill=hm_runs),alpha=0.3) + 
+  geom_point(aes(color=hm_runs),alpha=0.7) + 
+  scale_color_viridis_c(aesthetics = c("color","fill"))
+
+boston_test %>%
+  ggplot(aes(x=tempF,y=precip)) + 
+  geom_parttree(data=ex_fit,aes(fill=hm_runs),alpha=0.3) + 
+  geom_point(aes(color=hm_runs),alpha=0.7) + 
+  scale_color_viridis_c(aesthetics = c("color","fill"))
