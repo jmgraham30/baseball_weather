@@ -3,6 +3,7 @@ library(tidyverse)
 library(tidymodels)
 library(parttree)
 library(vip)
+library(RColorBrewer) # for plot colors
 
 
 # set protocols and themes
@@ -55,6 +56,16 @@ ggplot(boot_coefs, aes(estimate)) +
   geom_vline(aes(xintercept = .lower), data = percentile_intervals, col = "blue") +
   geom_vline(aes(xintercept = .upper), data = percentile_intervals, col = "blue")
 
+boot_aug <- 
+  boot_models %>% 
+  sample_n(50) %>% 
+  mutate(augmented = map(model, augment)) %>% 
+  unnest(augmented)
 
-
+ggplot(boot_aug, aes(vis_runs, wl_binary)) +
+  geom_line(aes(y = exp(.fitted)/(1+exp(.fitted)), group = id), col = "gray") +
+  geom_jitter(height=0.025,aes(color=factor(wl_binary))) + 
+  scale_color_manual(values = c("#E69F00","#009E73")) + 
+  labs(x="Number of Visitor Runs Scores", y="Win Likelihood",
+       color="Win/Loss")
 
