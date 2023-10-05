@@ -35,15 +35,28 @@ boston_game_weather_att <- boston_game_weather %>%
   filter(attendance > 0) %>%
   mutate(attendance_log = log10(attendance))
 
-attend_intervals <- reg_intervals(attendance_log ~ humid + precip + tempF + date_num,
+attend_intervals <- reg_intervals(attendance ~ humid + precip + tempF + date_num,
                                   data=boston_game_weather_att,
                                   keep_reps = TRUE)
+
+attend_intervals %>%
+  ggplot(aes(x=.estimate,y=term)) + 
+  geom_point(size=2) + 
+  geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
+  geom_vline(xintercept = 0.0,linetype = "dashed")
+
 
 ### Duration
 
 duration_intervals <- reg_intervals(duration ~ humid + precip + tempF + date_num + vis_runs + hm_runs + wl,
                                     data=boston_game_weather,
                                     keep_reps = TRUE)
+
+duration_intervals %>%
+  ggplot(aes(x=.estimate,y=term)) + 
+  geom_point(size=2) + 
+  geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
+  geom_vline(xintercept = 0.0,linetype = "dashed")
 
 
 ###### Tree Models for Duration and Attendance #######
