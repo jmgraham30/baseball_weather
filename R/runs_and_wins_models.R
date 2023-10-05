@@ -70,7 +70,13 @@ ggplot(boot_aug, aes(vis_runs, wl_binary)) +
        color="Win/Loss")
 
 
+##
 
+win_loss_intervals <- reg_intervals(wl_binary ~ date + vis_runs + humid + precip + tempF,
+                                    data=boston_game_weather,
+                                    model_fn = "glm",
+                                    family = "binomial",
+                                    keep_reps = TRUE)
 
 
 ############################ Useless ##############################
