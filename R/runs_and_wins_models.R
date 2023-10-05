@@ -58,7 +58,7 @@ ggplot(boot_coefs, aes(estimate)) +
 
 boot_aug <- 
   boot_models %>% 
-  sample_n(50) %>% 
+  sample_n(150) %>% 
   mutate(augmented = map(model, augment)) %>% 
   unnest(augmented)
 
