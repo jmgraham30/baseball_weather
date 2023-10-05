@@ -1,6 +1,10 @@
 # load useful packages
 library(tidyverse)
 library(tidymodels)
+library(parttree)
+library(vip)
+library(RColorBrewer) # for plot colors
+library(rpart.plot)
 
 # set protocols and themes
 theme_set(theme_minimal(base_size = 12))
@@ -22,3 +26,148 @@ boston_game_weather <- boston_game_weather %>%
 
 # check results
 glimpse(boston_game_weather)
+
+###### Tree Models for Duration and Attendance #######
+
+### Attendance
+
+boston_game_weather_att <- boston_game_weather %>%
+  filter(attendance > 0) %>%
+  mutate(attendance_log = log10(attendance))
+
+# create test/train splits
+boston_split <- initial_split(boston_game_weather_att, strata = year)
+boston_train <- training(boston_split)
+boston_test <- testing(boston_split)
+# create cv folds
+boston_folds <- vfold_cv(boston_train)
+# define model specification
+tree_spec <- decision_tree(
+  cost_complexity = tune(),
+  tree_depth = tune(),
+  min_n = tune()) %>%
+  set_engine("rpart") %>%
+  set_mode("regression")
+# create tuning grid for hyperparameters
+tree_grid <- grid_regular(cost_complexity(), 
+                          tree_depth(), 
+                          min_n(),
+                          levels = 5)
+# set up workflow
+boston_recipe <- recipe(attendance_log ~ humid + precip + tempF + date, data = boston_train)
+
+boston_wf <- workflow() %>%
+  add_recipe(boston_recipe)
+# tune
+tree_rs <- boston_wf %>%
+  add_model(tree_spec) %>%
+  tune_grid(resamples = boston_folds,
+            grid = tree_grid,
+            metrics = metric_set(rmse,mae)
+  )
+
+autoplot(tree_rs)
+
+show_best(tree_rs, "rmse")
+
+select_best(tree_rs, "rmse")
+
+show_best(tree_rs, "mae")
+
+select_best(tree_rs, "mae")
+
+final_tree <- finalize_model(tree_spec, select_best(tree_rs, "mae"))
+
+final_tree_fit <- fit(final_tree, attendance_log ~ humid + precip + tempF + date, boston_train)
+
+final_tree_fit %>%
+  vip(geom = "col", aesthetics = list(fill = "midnightblue", alpha = 0.8)) +
+  scale_y_continuous(expand = c(0, 0))
+
+# refit with just two predictors
+ex_fit <- fit(final_tree,attendance_log ~ tempF + date, boston_train)
+
+
+boston_train %>%
+  ggplot(aes(x=date,y=tempF)) + 
+  geom_parttree(data=ex_fit,aes(fill=attendance_log),alpha=0.3) + 
+  geom_point(aes(color=attendance_log),alpha=0.7) + 
+  scale_color_viridis_c(aesthetics = c("color","fill"))
+
+boston_test %>%
+  ggplot(aes(x=date,y=tempF)) + 
+  geom_parttree(data=ex_fit,aes(fill=attendance_log),alpha=0.3) + 
+  geom_point(aes(color=attendance_log),alpha=0.7) + 
+  scale_color_viridis_c(aesthetics = c("color","fill"))
+
+
+### Duration
+
+# create test/train splits
+boston_split <- initial_split(boston_game_weather, strata = year)
+boston_train <- training(boston_split)
+boston_test <- testing(boston_split)
+# create cv folds
+boston_folds <- vfold_cv(boston_train)
+# define model specification
+tree_spec <- decision_tree(
+  cost_complexity = tune(),
+  tree_depth = tune(),
+  min_n = tune()) %>%
+  set_engine("rpart") %>%
+  set_mode("regression")
+# create tuning grid for hyperparameters
+tree_grid <- grid_regular(cost_complexity(), 
+                          tree_depth(), 
+                          min_n(),
+                          levels = 5)
+# set up workflow
+boston_recipe <- recipe(duration ~ humid + precip + tempF + date + vis_runs + hm_runs + wl, data = boston_train)
+
+boston_wf <- workflow() %>%
+  add_recipe(boston_recipe)
+# tune
+tree_rs <- boston_wf %>%
+  add_model(tree_spec) %>%
+  tune_grid(resamples = boston_folds,
+            grid = tree_grid,
+            metrics = metric_set(rmse,mae)
+  )
+
+autoplot(tree_rs)
+
+show_best(tree_rs, "rmse")
+
+select_best(tree_rs, "rmse")
+
+show_best(tree_rs, "mae")
+
+select_best(tree_rs, "mae")
+
+final_tree <- finalize_model(tree_spec, select_best(tree_rs, "mae"))
+
+final_tree_fit <- fit(final_tree, duration ~ humid + precip + tempF + date + vis_runs + hm_runs + wl, boston_train)
+
+final_tree_fit %>%
+  vip(geom = "col", aesthetics = list(fill = "midnightblue", alpha = 0.8)) +
+  scale_y_continuous(expand = c(0, 0))
+
+# refit with just two predictors
+ex_fit <- fit(final_tree,duration ~ date + vis_runs, boston_train)
+
+
+boston_train %>%
+  ggplot(aes(x=date,y=vis_runs)) + 
+  geom_parttree(data=ex_fit,aes(fill=duration),alpha=0.3) + 
+  geom_point(aes(color=duration),alpha=0.7) + 
+  scale_color_viridis_c(aesthetics = c("color","fill"))
+
+
+boston_test %>%
+  ggplot(aes(x=date,y=vis_runs)) + 
+  geom_parttree(data=ex_fit,aes(fill=duration),alpha=0.3) + 
+  geom_point(aes(color=duration),alpha=0.7) + 
+  scale_color_viridis_c(aesthetics = c("color","fill"))
+
+tree_fit_rpart <- extract_fit_engine(final_tree_fit)
+rpart.plot(tree_fit_rpart)
