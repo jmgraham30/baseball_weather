@@ -3,7 +3,10 @@ title: "Open-Air Baseball Parks"
 subtitle: "The Impacts of Weather Conditions"
 author: "Jason M Graham"
 institute: "University of Scranton"
-format: revealjs
+format: 
+  revealjs:
+    self-contained: true
+    self-contained-math: true
 bibliography: presentation_bib.bib
 ---
 
@@ -386,6 +389,14 @@ wb_precip <- boston_game_weather %>%
 (wa_temp + wa_humid + wa_precip) / (wb_temp + wb_humid + wb_precip) 
 ```
 
+
+## Model Estimates for Win/Loss
+
+![Bootstrap estimates for logistic regression coefficients for win/loss.](../figs/win_loss_log_reg_coeffs.png){#fig-log_reg-coeff fig-width=3 fig-height=4}
+
+## Win/Loss Model Predictions
+
+![Bootstrap predictions for logistic regression model for win/loss.](../figs/win_loss_logistic_reg_preds.png){#fig-log_reg-coeff fig-width=3 fig-height=4}
 
 ## Conclusions
 

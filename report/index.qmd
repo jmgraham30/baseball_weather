@@ -9,6 +9,8 @@ format:
     echo: true
     toc: true
     toc-location: left
+    self-contained: true
+    self-contained-math: true
 bibliography: report_bib.bib
 ---
 
@@ -579,6 +581,11 @@ It appears that there may be some temporal trends in the climate and weather var
 ## Model Results
 
 
+### Predictors of Wins
+
+![Bootstrap estimates for logistic regression coefficients for win/loss.](../figs/win_loss_log_reg_coeffs.png){#fig-log_reg-coeff fig-width=5 fig-height=8}
+
+![Bootstrap predictions for logistic regression model for win/loss.](../figs/win_loss_logistic_reg_preds.png){#fig-log_reg-coeff fig-width=5 fig-height=8}
 
 ## Conclusions
 
