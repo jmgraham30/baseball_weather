@@ -45,6 +45,15 @@ attend_intervals %>%
   geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
   geom_vline(xintercept = 0.0,linetype = "dashed")
 
+attend_intervals %>%
+  unnest(.replicates) %>%
+  ggplot(aes(estimate)) +
+  geom_histogram(bins = 30,color="white") +
+  facet_wrap( ~ term, scales = "free") +
+  geom_vline(aes(xintercept = .lower), data = attend_intervals, col = "blue") +
+  geom_vline(aes(xintercept = .upper), data = attend_intervals, col = "blue")
+
+
 
 ### Duration
 
@@ -57,6 +66,15 @@ duration_intervals %>%
   geom_point(size=2) + 
   geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
   geom_vline(xintercept = 0.0,linetype = "dashed")
+
+duration_intervals %>%
+  unnest(.replicates) %>%
+  ggplot(aes(estimate)) +
+  geom_histogram(bins = 30,color="white") +
+  facet_wrap( ~ term, scales = "free") +
+  geom_vline(aes(xintercept = .lower), data = duration_intervals, col = "blue") +
+  geom_vline(aes(xintercept = .upper), data = duration_intervals, col = "blue")
+
 
 
 ###### Tree Models for Duration and Attendance #######
