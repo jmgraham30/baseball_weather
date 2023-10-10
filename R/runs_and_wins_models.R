@@ -79,6 +79,21 @@ win_loss_intervals <- reg_intervals(wl_binary ~ date + vis_runs + humid + precip
                                     keep_reps = TRUE)
 
 
+runs_intervals <- reg_intervals(hm_runs ~ date + vis_runs + humid + precip + tempF,
+                                    data=boston_game_weather,
+                                    model_fn = "lm",
+                                    type = "percentile",
+                                    keep_reps = TRUE)
+
+runs_intervals %>%
+  unnest(.replicates) %>%
+  ggplot(aes(estimate)) +
+  geom_histogram(bins = 30,color="white") +
+  facet_wrap( ~ term, scales = "free") +
+  geom_vline(aes(xintercept = .lower), data = runs_intervals, col = "blue") +
+  geom_vline(aes(xintercept = .upper), data = runs_intervals, col = "blue")
+
+
 ############################ Useless ##############################
 
 # create test/train splits

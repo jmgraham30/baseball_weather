@@ -398,6 +398,12 @@ wb_precip <- boston_game_weather %>%
 
 ![Bootstrap predictions for logistic regression model for win/loss.](../figs/win_loss_logistic_reg_preds.png){#fig-log_reg-coeff fig-width=3 fig-height=4}
 
+## Model Estimates for Red Sox Runs
+
+![Bootstrap estimates for linear regression coefficients for number of runs scored by Red Sox.](../figs/predictors_of_runs.png){#fig-lm-coeff fig-width=5 fig-height=8}
+
+
+
 ## Conclusions
 
 

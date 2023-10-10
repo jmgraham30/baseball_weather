@@ -576,16 +576,31 @@ It appears that there may be some temporal trends in the climate and weather var
 
 ## Models
 
+We will use different models to address several questions. First, we will use logistic regression to assess whether there is a relationship between the climate and weather variables, time, and visiting team performance and the outcome of the game (win or loss). Second, we will use linear regression to assess whether there is a relationship between the climate and weather variables, time, and visiting team performance and the number of runs scored by  Boston. Finally, we will use decision trees to model the duration and attendance of games. 
 
+For the first two models, we use the bootstrap in order to estimate the sampling distributions and confidence intervals for the model coefficients. For the decision tree models, we use cross-validation to tune hyperparameters and estimate the predictive accuracy of the models.
 
 ## Model Results
 
 
 ### Predictors of Wins
 
+@fig-log_reg-coeff shows the bootstrap estimates for the logistic regression coefficients for the predictors of win/loss along with estimates for the 95% confidence intervals. Since the confidence intervals for date, humididty, precipitation, and temperature all include 0, we cannot conclude that there is a relationship between these variables and the outcome of the game. However, we do observe that there is evidence that a visiting team's performance is negatively associated with the probability of a win for the Red Sox. While this is not a surprising result, it provides us with a quantitative estimate of the impact of the visiting team's performance on the outcome of the game.
+
 ![Bootstrap estimates for logistic regression coefficients for win/loss.](../figs/win_loss_log_reg_coeffs.png){#fig-log_reg-coeff fig-width=5 fig-height=8}
 
-![Bootstrap predictions for logistic regression model for win/loss.](../figs/win_loss_logistic_reg_preds.png){#fig-log_reg-coeff fig-width=5 fig-height=8}
+
+@fig-log_reg-win-prob shows a series of bootstrap predictions for the probability of a win for the Red Sox as a function of the visiting team's performance. We observe that as the visiting team's performance increases, the probability of a win for the Red Sox decreases. The observed data is plotted along with the model predictions.  
+
+![Bootstrap predictions for logistic regression model for win/loss.](../figs/win_loss_logistic_reg_preds.png){#fig-log_reg-win-prob fig-width=5 fig-height=8}
+
+
+### Predictors of Runs Scored
+
+@fig-lm-coeff shows the bootstrap estimates for the linear regression coefficients for the predictors of number of runs scored by teh Red Sox along with estimates for the 95% confidence intervals. Since the confidence intervals for humididty, precipitation, and temperature all include 0, we cannot conclude that there is a relationship between these variables and the number of runs. The model does provide evidence that the number of runs scored by the Red Sox has increased over time, and that the visiting team's performance is positively associated with the number of runs scored by the Red Sox. However, in both cases the effect size is quite small.
+
+![Bootstrap estimates for linear regression coefficients for number of runs scored by Red Sox.](../figs/predictors_of_runs.png){#fig-lm-coeff fig-width=5 fig-height=8}
+
 
 ## Conclusions
 
