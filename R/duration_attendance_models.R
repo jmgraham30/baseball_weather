@@ -146,8 +146,18 @@ boston_test %>%
   geom_point(aes(color=attendance_log),alpha=0.7) + 
   scale_color_viridis_c(aesthetics = c("color","fill"))
 
-tree_fit_rpart <- extract_fit_engine(final_tree_fit)
-rpart.plot(tree_fit_rpart,roundint=FALSE)
+final_tree_fit %>%
+  predict(boston_test) %>%
+  cbind(boston_test %>% select(attendance_log)) %>%
+  ggplot(aes(attendance_log, .pred)) +
+  geom_abline(slope = 1, lty = 2, color = "gray50", alpha = 0.5) +
+  geom_point(alpha = 0.6, color = "midnightblue") +
+  coord_fixed() + 
+  xlim(c(2.75,4.75)) + ylim(c(2.75,4.75)) + 
+  labs(x = "Observed Attendance (log)", y = "Predicted Attendance (log)")
+
+#tree_fit_rpart <- extract_fit_engine(final_tree_fit)
+#rpart.plot(tree_fit_rpart,roundint=FALSE)
 
 ### Duration
 
