@@ -62,13 +62,13 @@ duration_intervals <- reg_intervals(duration ~ humid + precip + tempF + date_num
                                     data=boston_game_weather,
                                     keep_reps = TRUE)
 
-duration_intervals %>%
+p_duration_coeff <- duration_intervals %>%
   ggplot(aes(x=.estimate,y=term)) + 
   geom_point(size=2) + 
   geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
   geom_vline(xintercept = 0.0,linetype = "dashed")
 
-duration_intervals %>%
+p_duration_ints <- duration_intervals %>%
   unnest(.replicates) %>%
   ggplot(aes(estimate)) +
   geom_histogram(bins = 30,color="white") +
@@ -77,6 +77,7 @@ duration_intervals %>%
   geom_vline(aes(xintercept = .upper), data = duration_intervals, col = "blue")
 
 
+p_duration_coeff + p_duration_ints
 
 ###### Tree Models for Duration and Attendance #######
 
@@ -230,3 +231,12 @@ boston_test %>%
 
 tree_fit_rpart <- extract_fit_engine(final_tree_fit)
 rpart.plot(tree_fit_rpart,roundint=FALSE)
+
+final_tree_fit %>%
+  predict(boston_test) %>%
+  cbind(boston_test %>% select(duration,date)) %>%
+  ggplot(aes(duration, .pred)) +
+  geom_abline(slope = 1, lty = 2, color = "gray50", alpha = 0.5) +
+  geom_point(alpha = 0.6, color = "midnightblue") +
+  coord_fixed() + 
+  labs(x = "Observed Duration", y = "Predicted Duration")
