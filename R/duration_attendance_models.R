@@ -40,13 +40,13 @@ attend_intervals <- reg_intervals(attendance ~ humid + precip + tempF + date_num
                                   data=boston_game_weather_att,
                                   keep_reps = TRUE)
 
-attend_intervals %>%
+p_attend_coeffs <- attend_intervals %>%
   ggplot(aes(x=.estimate,y=term)) + 
   geom_point(size=2) + 
   geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
   geom_vline(xintercept = 0.0,linetype = "dashed")
 
-attend_intervals %>%
+p_attend_ints <- attend_intervals %>%
   unnest(.replicates) %>%
   ggplot(aes(estimate)) +
   geom_histogram(bins = 30,color="white") +
@@ -54,7 +54,7 @@ attend_intervals %>%
   geom_vline(aes(xintercept = .lower), data = attend_intervals, col = "blue") +
   geom_vline(aes(xintercept = .upper), data = attend_intervals, col = "blue")
 
-
+p_attend_coeffs + p_attend_ints
 
 ### Duration
 
