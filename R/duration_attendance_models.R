@@ -5,6 +5,7 @@ library(parttree)
 library(vip)
 library(RColorBrewer) # for plot colors
 library(rpart.plot)
+library(patchwork)
 
 # set protocols and themes
 theme_set(theme_minimal(base_size = 12))
