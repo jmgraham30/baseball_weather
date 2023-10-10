@@ -148,8 +148,8 @@ boston_test %>%
 
 final_tree_fit %>%
   predict(boston_test) %>%
-  cbind(boston_test %>% select(attendance_log)) %>%
-  ggplot(aes(attendance_log, .pred)) +
+  cbind(boston_test %>% select(attendance_log,date)) %>%
+  ggplot(aes(attendance_log, .pred,size=date)) +
   geom_abline(slope = 1, lty = 2, color = "gray50", alpha = 0.5) +
   geom_point(alpha = 0.6, color = "midnightblue") +
   coord_fixed() + 
