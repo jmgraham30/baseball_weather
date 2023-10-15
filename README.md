@@ -2,7 +2,7 @@
 
 The content of this repository is meant to serve as a model for the semester project assignment in the course [DS 201 *Introduction to Data Science*](https://intro-ds.netlify.app/) as taught during the Fall 2023 semester at the [University of Scranton](https://www.scranton.edu/). 
 
-One may find in this reposiroty:
+One may find in this repository:
 
 - The data needed to reproduce the analyses, see [data](https://github.com/jmgraham30/baseball_weather/tree/main/data) folder.
 
@@ -12,7 +12,7 @@ One may find in this reposiroty:
 
 - The code used to model the data, see scripts `runs_and_wins_models.R` and `duration_attendance_models.R`.
 
-- All code is contained in the [R](https://github.com/jmgraham30/baseball_weather/tree/main/R) folder.
+- All code is contained in the [R](https://github.com/jmgraham30/baseball_weather/tree/main/R) folder. See the [corresponding README](https://github.com/jmgraham30/baseball_weather/tree/main/R#r-scripts-for-project-on-open-air-baseball-parks) file for more information. 
 
 - A [report](https://github.com/jmgraham30/baseball_weather/tree/main/report) written as a [Quarto](https://quarto.org/) document presenting the problem, data, and analyses for this project. [View the rendered report](https://symphonious-crostata-5b1f0b.netlify.app/report/).
 
