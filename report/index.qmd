@@ -34,6 +34,10 @@ venues_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/ma
 
 bos_game_weather_html <- "https://raw.githubusercontent.com/jmgraham30/baseball_weather/main/data/boston_game_weather.csv"
 
+boston_test_attend <- read_csv("data/boston_test_attend.csv")
+
+boston_test_duration <- read_csv("data/boston_test_duration.csv")
+
 ```
 
 

@@ -7,6 +7,9 @@ library(RColorBrewer) # for plot colors
 library(rpart.plot)
 library(patchwork)
 
+# set a seed
+set.seed(1234)
+
 # set protocols and themes
 theme_set(theme_minimal(base_size = 12))
 tidymodels_prefer()
@@ -166,6 +169,8 @@ final_tree_fit %>%
   xlim(c(2.75,4.75)) + ylim(c(2.75,4.75)) + 
   labs(x = "Observed Attendance (log)", y = "Predicted Attendance (log)")
 
+write_csv(boston_test,"data/boston_test_attend.csv")
+
 #tree_fit_rpart <- extract_fit_engine(final_tree_fit)
 #rpart.plot(tree_fit_rpart,roundint=FALSE)
 
@@ -220,6 +225,8 @@ final_tree_fit %>%
   vip(geom = "col", aesthetics = list(fill = "midnightblue", alpha = 0.8)) +
   scale_y_continuous(expand = c(0, 0))
 
+write_rds(final_tree_fit, "models/final_tree_fit_duration.rds")
+
 # refit with just two predictors
 ex_fit <- fit(final_tree,duration ~ date_num + vis_runs, boston_train)
 
@@ -248,3 +255,5 @@ final_tree_fit %>%
   geom_point(alpha = 0.6, color = "midnightblue") +
   coord_fixed() + 
   labs(x = "Observed Duration", y = "Predicted Duration")
+
+write_csv(boston_test,"data/boston_test_duration.csv")
