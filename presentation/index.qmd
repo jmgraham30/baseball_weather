@@ -55,6 +55,14 @@ baseball_parks$Open_Roof <- c("No",rep("Yes",9),
                               "No","No",
                               rep("Yes",7),"No","Yes",
                               "Yes","No","No","No","Yes")
+
+boston_test_attend <- read_csv("../data/boston_test_attend.csv")
+
+boston_test_duration <- read_csv("../data/boston_test_duration.csv")
+
+final_tree_fit_attend <- read_rds("../models/final_tree_fit_attend.rds")
+
+final_tree_fit_duration <- read_rds("../models/final_tree_fit_duration.rds")
 ```
 
 ## Initial Research Question
