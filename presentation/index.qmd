@@ -16,6 +16,7 @@ bibliography: presentation_bib.bib
 
 # load packages
 library(tidyverse) # wrangling, plots etc.
+library(tidymodels) # modeling
 library(GGally) # paired plots
 library(skimr) # data summary
 library(knitr) # for table formatting
@@ -426,6 +427,26 @@ wb_precip <- boston_game_weather %>%
 
 ![Game Attendance](../figs/attendance_predictions.png)
 
+## Attendance Model Performance
+
+```{r}
+#| echo: false
+#| label: tbl-attend-metrics
+#| tbl-cap: Metrics for Game Attendance Model
+
+attend_metrics_tbl <- final_tree_fit_attend %>%
+  predict(boston_test_attend) %>%
+  cbind(boston_test_attend) %>%
+  metrics(truth = attendance_log, estimate = .pred) %>%
+  select(.metric, .estimate) %>%
+  rename("Metric" = .metric, "Value" = .estimate) 
+
+attend_metrics_tbl %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+        
+```
 
 ## Duration Predictors
 
@@ -440,6 +461,28 @@ wb_precip <- boston_game_weather %>%
 ## Duration Predictions
 
 ![Game Duration](../figs/duration_preds.png)
+
+
+## Duration Model Performance
+
+```{r}
+#| echo: false
+#| label: tbl-duration-metrics
+#| tbl-cap: Metrics for Game Duration Model
+
+duration_metrics_tbl <- final_tree_fit_duration %>%
+  predict(boston_test_duration) %>%
+  cbind(boston_test_duration) %>%
+  metrics(truth = duration, estimate = .pred) %>%
+  select(.metric, .estimate) %>%
+  rename("Metric" = .metric, "Value" = .estimate) 
+
+duration_metrics_tbl %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+        
+```
 
 ## Conclusions
 

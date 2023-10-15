@@ -20,6 +20,7 @@ bibliography: report_bib.bib
 
 # load packages
 library(tidyverse) # wrangling, plots etc.
+library(tidymodels) # modeling
 library(GGally) # paired plots
 library(skimr) # data summary
 library(knitr) # for table formatting
@@ -618,8 +619,26 @@ For the first two models, we use the bootstrap in order to estimate the sampling
 ![Variable importance measures for predictors in tuned decision tree model for the game attendance.](../figs/attendance_vip.png){#fig-attendance_vip fig-width=5 fig-height=8}
 
 
-![Game Attendance](../figs/attendance_predictions.png){#fig-attendance_preds fig-width=5 fig-height=8}
+![Predicted values versus observed values for tuned decision tree model for game attendance.](../figs/attendance_predictions.png){#fig-attendance_preds fig-width=5 fig-height=8}
 
+```{r}
+#| echo: false
+#| label: tbl-attend-metrics
+#| tbl-cap: Metrics to assess model perforamnce for tuned decision tree to predict game attendance.
+
+attend_metrics_tbl <- final_tree_fit_attend %>%
+  predict(boston_test_attend) %>%
+  cbind(boston_test_attend) %>%
+  metrics(truth = attendance_log, estimate = .pred) %>%
+  select(.metric, .estimate) %>%
+  rename("Metric" = .metric, "Value" = .estimate) 
+
+attend_metrics_tbl %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+        
+```
 
 ### Game Duration Model Results
 
@@ -629,8 +648,27 @@ For the first two models, we use the bootstrap in order to estimate the sampling
 
 
 
-![Game Duration](../figs/duration_preds.png){#fig-duration_preds fig-width=5 fig-height=8}
+![Predicted values versus observed values for tuned decision tree model for game duration.](../figs/duration_preds.png){#fig-duration_preds fig-width=5 fig-height=8}
 
+
+```{r}
+#| echo: false
+#| label: tbl-duration-metrics
+#| tbl-cap: Metrics to assess model perforamnce for tuned decision tree to predict game duration.
+
+duration_metrics_tbl <- final_tree_fit_duration %>%
+  predict(boston_test_duration) %>%
+  cbind(boston_test_duration) %>%
+  metrics(truth = duration, estimate = .pred) %>%
+  select(.metric, .estimate) %>%
+  rename("Metric" = .metric, "Value" = .estimate) 
+
+duration_metrics_tbl %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+        
+```
 
 ## Conclusions
 
