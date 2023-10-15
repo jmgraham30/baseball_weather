@@ -118,7 +118,7 @@ ggplot() +
 #| label: tbl-data
 #| tbl-cap: Fenway Park Home Game and Weather Data 
 boston_game_weather %>%
-  head(3) %>%
+  head(4) %>%
   kable()
 ```
 
