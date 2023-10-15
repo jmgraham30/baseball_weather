@@ -11,6 +11,8 @@ library(patchwork)
 theme_set(theme_minimal(base_size = 12))
 tidymodels_prefer()
 
+doParallel::registerDoParallel()
+
 # load the data
 boston_game_weather <- read_csv("data/boston_game_weather.csv")
 
@@ -135,6 +137,8 @@ final_tree_fit <- fit(final_tree, attendance_log ~ humid + precip + tempF + date
 final_tree_fit %>%
   vip(geom = "col", aesthetics = list(fill = "midnightblue", alpha = 0.8)) +
   scale_y_continuous(expand = c(0, 0))
+
+write_rds(final_tree_fit, "models/final_tree_fit_attend.rds")
 
 # refit with just two predictors
 ex_fit <- fit(final_tree,attendance_log ~ tempF + date_num, boston_train)
