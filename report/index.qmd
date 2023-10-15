@@ -602,6 +602,28 @@ For the first two models, we use the bootstrap in order to estimate the sampling
 ![Bootstrap estimates for linear regression coefficients for number of runs scored by Red Sox.](../figs/predictors_of_runs.png){#fig-lm-coeff fig-width=5 fig-height=8}
 
 
+
+### Game Attendance Model Results
+
+![Bootstrap estimates for linear regression coefficients for game attendance.](../figs/attendance_ests.png){#fig-attend-ests fig-width=8 fig-height=6}
+
+![Variable importance measures for predictors in tuned decision tree model for the game attendance.](../figs/attendance_vip.png){#fig-attendance_vip fig-width=5 fig-height=8}
+
+
+![Game Attendance](../figs/attendance_predictions.png){#fig-attendance_preds fig-width=5 fig-height=8}
+
+
+### Game Duration Model Results
+
+![Bootstrap estimates for linear regression coefficients for game duration.](../figs/duration_ests.png){#fig-dur-ests fig-width=8 fig-height=6}
+
+![Variable importance measures for predictors in tuned decision tree model for the game duration.](../figs/duration_vip.png){#fig-duration_vip fig-width=5 fig-height=8}
+
+
+
+![Game Duration](../figs/duration_preds.png){#fig-duration_preds fig-width=5 fig-height=8}
+
+
 ## Conclusions
 
 

@@ -403,6 +403,35 @@ wb_precip <- boston_game_weather %>%
 ![Bootstrap estimates for linear regression coefficients for number of runs scored by Red Sox.](../figs/predictors_of_runs.png){#fig-lm-coeff fig-width=5 fig-height=8}
 
 
+## Attendance Predictors
+
+
+![Game Attendance](../figs/attend_coeffs.png)
+
+## Attendance Variable Importance
+
+
+![Game Attendance](../figs/attendance_vip.png)
+
+
+## Attendance Predictions
+
+![Game Attendance](../figs/attendance_predictions.png)
+
+
+## Duration Predictors
+
+![Game Duration](../figs/duration_coeffs.png)
+
+
+## Duration Variable Importance
+
+
+![Game Duration](../figs/duration_vip.png)
+
+## Duration Predictions
+
+![Game Duration](../figs/duration_preds.png)
 
 ## Conclusions
 

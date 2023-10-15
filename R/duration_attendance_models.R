@@ -44,7 +44,8 @@ p_attend_coeffs <- attend_intervals %>%
   ggplot(aes(x=.estimate,y=term)) + 
   geom_point(size=2) + 
   geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
-  geom_vline(xintercept = 0.0,linetype = "dashed")
+  geom_vline(xintercept = 0.0,linetype = "dashed") +
+  labs(x="Coefficient Estimate",y="Predictor")
 
 p_attend_ints <- attend_intervals %>%
   unnest(.replicates) %>%
@@ -52,7 +53,8 @@ p_attend_ints <- attend_intervals %>%
   geom_histogram(bins = 30,color="white") +
   facet_wrap( ~ term, scales = "free") +
   geom_vline(aes(xintercept = .lower), data = attend_intervals, col = "blue") +
-  geom_vline(aes(xintercept = .upper), data = attend_intervals, col = "blue")
+  geom_vline(aes(xintercept = .upper), data = attend_intervals, col = "blue") +
+  labs(x="Coefficient Estimate",y="Count")
 
 p_attend_coeffs + p_attend_ints
 
@@ -66,7 +68,8 @@ p_duration_coeff <- duration_intervals %>%
   ggplot(aes(x=.estimate,y=term)) + 
   geom_point(size=2) + 
   geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
-  geom_vline(xintercept = 0.0,linetype = "dashed")
+  geom_vline(xintercept = 0.0,linetype = "dashed") +
+  labs(x="Coefficient Estimate",y="Predictor")
 
 p_duration_ints <- duration_intervals %>%
   unnest(.replicates) %>%
@@ -74,7 +77,8 @@ p_duration_ints <- duration_intervals %>%
   geom_histogram(bins = 30,color="white") +
   facet_wrap( ~ term, scales = "free") +
   geom_vline(aes(xintercept = .lower), data = duration_intervals, col = "blue") +
-  geom_vline(aes(xintercept = .upper), data = duration_intervals, col = "blue")
+  geom_vline(aes(xintercept = .upper), data = duration_intervals, col = "blue") +
+  labs(x="Coefficient Estimate",y="Count")
 
 
 p_duration_coeff + p_duration_ints
