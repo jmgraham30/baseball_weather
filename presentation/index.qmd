@@ -112,9 +112,11 @@ ggplot() +
 ![Image from [@ticketmasterStepInside]](https://blog.ticketmaster.com/wp-content/uploads/Fenway-Park-field.jpg){fig-align="center"}
 
 
-## Fenway Home Game and Weather Data
+## Home Game and Weather Data
 
 ```{r}
+#| label: tbl-data
+#| tbl-cap: Fenway Park Home Game and Weather Data 
 boston_game_weather %>%
   head(3) %>%
   kable()
@@ -442,9 +444,7 @@ attend_metrics_tbl <- final_tree_fit_attend %>%
   rename("Metric" = .metric, "Value" = .estimate) 
 
 attend_metrics_tbl %>%
-  kable() %>%
-  kable_styling() %>%
-  scroll_box(width = "100%", height = "200px")
+  kable() 
         
 ```
 
@@ -478,9 +478,7 @@ duration_metrics_tbl <- final_tree_fit_duration %>%
   rename("Metric" = .metric, "Value" = .estimate) 
 
 duration_metrics_tbl %>%
-  kable() %>%
-  kable_styling() %>%
-  scroll_box(width = "100%", height = "200px")
+  kable() 
         
 ```
 
