@@ -635,12 +635,21 @@ For the first two models, we use the bootstrap in order to estimate the sampling
 
 ### Game Attendance Model Results
 
+To examine influences on game attendance, we start with a linear regression model with the log of attendance as the response variable and the climate and weather variables, time, and visiting team performance as the predictor variables. We use the bootstrap to estimate the sampling distributions and confidence intervals for the model coefficients. The results are shown in @fig-attend-ests. We observe that the confidence intervals for the coefficients for date, humidity, precipitation, and temperature all exclude 0. Thus, there is evidence of a relationship between these variables and the attendance of the games. Specifically, evidence suggests that there is a slight decrease in game attendance corresponding to an increase in precipitation. On the other hand, there is a slight to moderate increase in game attendance corresponding to an increase in temperature and humidity. Finally, there is evidence of increased in game attendance over time.
+
 ![Bootstrap estimates for linear regression coefficients for game attendance.](../figs/attendance_ests.png){#fig-attend-ests fig-width=8 fig-height=6}
+
+
+To go further, we also build a predictive model by tuning a decision tree to predict game attendance based on the predictors used in the linear regression model. We use cross-validation to tune the hyperparameters and estimate the predictive accuracy of the model. The results are shown in @fig-attendance_vip and @fig-attendance_preds. We observe that the most important predictors for the model are the date and temperature. This is consistent with our findings from the linear regression model. The model predictions are plotted against the observed values in @fig-attendance_preds. We observe that the model does a reasonable job of predicting the game attendance.
 
 ![Variable importance measures for predictors in tuned decision tree model for the game attendance.](../figs/attendance_vip.png){#fig-attendance_vip fig-width=5 fig-height=8}
 
 
 ![Predicted values versus observed values for tuned decision tree model for game attendance.](../figs/attendance_predictions.png){#fig-attendance_preds fig-width=5 fig-height=8}
+
+Note that the predictive accuracy of the model seems to be better in later years. 
+
+@tbl-attend-metrics records the values of test error metrics used to assess the performance of the tuned decision tree model for game attendance. 
 
 ```{r}
 #| echo: false
@@ -661,9 +670,16 @@ attend_metrics_tbl %>%
         
 ```
 
+
+Based on the test error metrics, we conclude that this model is mediocre with regard to its predictive accuracy although its qualitative results are consistent with those of our linear regression analysis.  
+
 ### Game Duration Model Results
 
+Similar to our analysis for game attendance, we start with a linear regression model with the game duration as the response variable and the climate and weather variables, time, and visiting team performance as the predictor variables. We use the bootstrap to estimate the sampling distributions and confidence intervals for the model coefficients. The results are shown in @fig-dur-ests. We observe that the confidence intervals for the coefficients for humidity, precipitation, and temperature all include 0 while the confidence intervals for the coefficients for Red Sox win, visitor runs, Red Sox runs, and date all exclude 0. Thus, evidence suggests that games are shorter when the Red Sox win, but overall longer when more runs are scored by either team. Further, there is evidence that games have gotten longer over time. 
+
 ![Bootstrap estimates for linear regression coefficients for game duration.](../figs/duration_ests.png){#fig-dur-ests fig-width=8 fig-height=6}
+
+The results of the tuned decision tree model for game duration are shown in @fig-duration_vip and @fig-duration_preds. We observe that the most important predictors for the model are the date and the number of runs scored by each team. The model predictions are plotted against the observed values in @fig-duration_preds. We observe that the model does a reasonable job of predicting the game duration except when the games are particularly long.
 
 ![Variable importance measures for predictors in tuned decision tree model for the game duration.](../figs/duration_vip.png){#fig-duration_vip fig-width=5 fig-height=8}
 
