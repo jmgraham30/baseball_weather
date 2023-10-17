@@ -549,6 +549,7 @@ prop_wins %>%
   ylim(c(0,1))
 ```
 
+This shows that the Red Sox tend to win around 60% of their home games. However, we also see that the Red Sox won a higher proportion of their home games from around 2003 to 2009.
 
 @fig-weather-time shows the change in the both the daily and yearly average climate and weather variables over time. 
 
