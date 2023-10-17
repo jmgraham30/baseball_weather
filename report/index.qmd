@@ -396,7 +396,7 @@ hs_precip <- boston_game_weather %>%
 
 Here it is difficult to see any clear pattern of influence that date, temperature, humidity, or precipitable water have on the number of runs the Red Sox score at home games over the specified period of time.  We observe that there are potential outliers in each of the plots in @fig-runs.
 
-@fig-wins shows shows the wins for the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.
+@fig-wins shows the wins for the Boston Red Sox at each home game from 1950 to 2022 (2020 excluded) plotted against date, temperature, humidity, and precipitable water, respectively.
 
 ```{r}
 #| message: false
@@ -503,7 +503,7 @@ as_precip <- boston_game_weather %>%
 (as_date + as_temp) / (as_humid + as_precip)
 ```
 
-We clearly see that the attendance of games has generally increased from 1950 to 2022. Further, it also appears that attendance increases with is that of temperature, humidity, and precipitable water. Some additional points include:
+We clearly see that the attendance of games has generally increased from 1950 to 2022. Further, it also appears that attendance increases with temperature, humidity, and precipitable water. Some additional points include:
 
 1) It appears that over time, the variance of game attendance has decreased, and there is a period of time (roughly 2005-2010) that the variance of game attendance is very low relative to other years. It is potentially interesting to determine a potential cause for this since it suggests that the Red Sox games where consistently well-attended during that time.
 
@@ -528,6 +528,26 @@ boston_game_weather %>%
 ```
 
 We observe that from around 2003 to 2009, the Red Sox where consistently winning a large number of games. This could relate to our earlier observation regarding the time period of consistently high game attendance observed in @fig-attend.
+
+Since the number of home games might vary across years, we also plot the proportion of home games won by the Red Sox per year in @fig-yearly-wins-prop.
+
+```{r}
+#| message: false
+#| label: fig-yearly-wins-prop
+#| fig-cap: The proportion of home games at Fenway Park which the Red Sox won plotted against year.
+
+prop_wins <- boston_game_weather %>%
+  group_by(year) %>%
+  summarise(games_played=n(), games_won = sum(wl_binary)) %>%
+  mutate(win_pct = games_won / games_played)
+
+prop_wins %>%
+  ggplot(aes(x=year,y=win_pct)) + 
+  geom_point(size=2,color="darkgreen",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="lightblue") + 
+  labs(x="Year",y="Win Percentage") + 
+  ylim(c(0,1))
+```
 
 
 @fig-weather-time shows the change in the both the daily and yearly average climate and weather variables over time. 
