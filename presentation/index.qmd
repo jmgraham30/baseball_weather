@@ -488,6 +488,12 @@ duration_metrics_tbl %>%
 
 ## Conclusions
 
+- lack of evidence that weather conditions have a significant impact on team performance or game outcome
 
+- weather conditions may have an impact on game attendance
+
+- weather conditions do not appear to have a significant impact on game duration
+
+- there is evidence that the number of runs scored by the home team and visiting team may have an impact on game duration
 
 ## References
