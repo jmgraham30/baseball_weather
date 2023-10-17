@@ -10,7 +10,6 @@ format:
     toc: true
     toc-location: left
     self-contained: true
-    self-contained-math: true
 bibliography: report_bib.bib
 ---
 
@@ -78,6 +77,7 @@ states_df <- map_data("state") %>%
 
 ## Executive Summary
 
+In this project we explore the impact that weather conditions may have on Major League Baseball (MLB) teams that play in open-air stadiums. We take as a case study the Boston Red Sox and their home stadium Fenway Park. Through inferential and predictive models, we find lack of evidence that weather conditions have a significant impact on team performance or game outcome. We do find evidence that weather conditions may have an impact on game attendance. Additionally, we examine factors that may impact game duration and find that weather conditions do not appear to have a significant impact on game duration. However, there is evidence that the number of runs scored by the home team and visiting team may have an impact on game duration. As a consequence of our modeling, we are able to quantify the impact that the number of runs scored by a visiting team has on the likelihood for the Red Sox to win a game.
 
 ## Background
 
@@ -155,7 +155,7 @@ To address our primary question, we collected and combined two sets of data. The
 
 ### Team Data
 
-To obtain the data on home games played by the Boston Red Sox at Fenway Park, we used the function `get_retrosheet` from the R package `retrosheet` to download game data for a specific year and team [@retrosheet_cite]. Then, we used a function `team_games` to iterate over all the years that the Red Sox played at Fenway Park, that is, 1912 - 2022 (skipping 2020 due to the COVID-19 pandemic). The code to accomplish this is in the [`team_home.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/team_home.R) script available at our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather). 
+To obtain the data on home games played by the Boston Red Sox at Fenway Park, we used the function `get_retrosheet` from the R package `retrosheet` to download game data for a specific year and team [@retrosheet_cite]. Then, we used a function `team_games` to iterate over all the years that the Red Sox played at Fenway Park, that is, 1912 - 2022 (skipping 2020 due to the COVID-19 pandemic). The code to accomplish this is in the [`team_home.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/team_home.R) script available at our [baseball_weather](https://github.com/jmgraham30/baseball_weather) GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather). 
 
 
 The `retrosheet` package contains a collection of tools to import and structure the single-season event, game-log, roster, and schedule data available from the [Retrosheet website](https://www.retrosheet.org) which maintains play-by-play accounts of as many major league games as possible. The Retrosheet data we downloaded for the Boston Red Sox has a structure indicated by @tbl-boston-data.
@@ -207,9 +207,9 @@ In order to address our initial research question, we combined the Boston weathe
 
 - Climate and weather data is only available starting in the 1950's while Boston Red Sox home grame data goes back to 1912. Thus, we must restrict the home game data to those observations starting in the 1950's.
 
-- The downloaded climate and weather data contains observations for many more days than just the days on which there were Red Sox home games. Thus, we must extract those climate and weather observatios corresponding to dates of games at Fenway.  
+- The downloaded climate and weather data contains observations for many more days than just the days on which there were Red Sox home games. Thus, we must extract those climate and weather observations corresponding to dates of games at Fenway.  
 
-All the necessary data manipulations were accomplished through functions from the `dplyr` package [@dplyr_cite]. See the [`boston_data_wrangling.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_data_wrangling.R) script available our baseball_weather GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather).
+All the necessary data manipulations were accomplished through functions from the `dplyr` package [@dplyr_cite]. See the [`boston_data_wrangling.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_data_wrangling.R) script available our [baseball_weather](https://github.com/jmgraham30/baseball_weather) GitHub repository, [view the GitHub repo](https://github.com/jmgraham30/baseball_weather).
 
 
 The combined weather game data for the Boston Red Sox home games at Fenway Park has a structure indicated by @tbl-boston-game-weather.
@@ -274,7 +274,7 @@ ra_4 <- boston_game_weather %>%
 We observe from @fig-rep1-edas that the Red Sox have won more games than they have lost and tend to win by a median of one run. 
 
 
-@fig-rep2-edas displays the distributions for the duration and attendance of Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020). The median duration for a game is 170 minutes while the median attendance is around thirty thousand. Note that Fenway Park currently seats over 37,000 [@wikipediaFenwayPark]. 
+@fig-rep2-edas displays the distributions for the duration and attendance of Red Sox home games played at Fenway Park from 1950 to 2022 (excluding 2020). The median duration for a game is 170 minutes while the median attendance is around thirty thousand. Note that Fenway Park currently seats over 37,000 people [@wikipediaFenwayPark]. 
 
 ```{r}
 #| message: false
@@ -318,11 +318,11 @@ boston_game_weather %>%
   labs(x="Year",y="Count",title="Observations with Zero Recorded Attendance")
 ```
 
-It's not immediately clear why there may be a zero recorded for attendance at some games. This could be an error but further investigation is required to determine for certain. It might be necessary to remove those observations with zero attendance depending on what specific questions we decide to address with models. 
+It's not immediately clear why there may be a zero recorded for attendance at some games. This could be an error but further investigation is required to determine for certain. It might be necessary to remove those observations with zero attendance depending on what specific questions we decide to address with models. Furthermore, due to the skewness of the attendance distribution, it may be useful to transform the attendance variable in order to facilitate modeling.
 
 ### Potential Predictor Variables
 
-Our main interest in this project is to examine how climate and weather factors impact aspects of baseball games such as the score, outcome, duration, and attendance games. As previously noted, we have data about humidity, precipitable water[^2], and temperature for the Red Sox home games.
+Our main interest in this project is to examine how climate and weather factors impact aspects of baseball games such as the score, outcome, duration, and game attendance. As previously noted, we have data about humidity, precipitable water[^2], and temperature for the Red Sox home games.
 
 [^2]: Precipitable water is the amount of water potentially available in the atmosphere for precipitation, usually measured in a vertical column that extends from the Earth's surface to the upper edge of the troposphere.
 

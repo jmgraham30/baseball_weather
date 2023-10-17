@@ -394,3 +394,15 @@ wb_precip <- boston_game_weather %>%
 
 (wa_temp + wb_temp) / (wa_humid + wb_humid) / (wa_precip + wb_precip)
 
+prop_wins <- boston_game_weather %>%
+  group_by(year) %>%
+  summarise(games_played=n(), games_won = sum(wl_binary)) %>%
+  mutate(win_pct = games_won / games_played)
+
+prop_wins %>%
+  ggplot(aes(x=year,y=win_pct)) + 
+  geom_point(size=2,color="darkgreen",alpha=0.5) + 
+  geom_smooth(color="#512d6d",fill="lightblue") + 
+  labs(x="Year",y="Win Percentage")
+
+
