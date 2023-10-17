@@ -602,11 +602,11 @@ wb_precip <- boston_game_weather %>%
 ```
 
 
-It appears that there may be some temporal trends in the climate and weather variables over time. In order to explore more about how the climate and weather over time may have an impact on the score, outcome, duration, or attendance of Red Sox home games, we will need to develop an appropriate model and assess it's predictive accuracy.  
+It appears that there may be some temporal trends in the climate and weather variables over time. In order to explore more about how the climate and weather over time may have an impact on the score, outcome, duration, or attendance of Red Sox home games, we will need to develop an appropriate modeling approach and assess it's performance.  
 
 ## Models
 
-We will use different models to address several questions. First, we will use logistic regression to assess whether there is a relationship between the climate and weather variables, time, and visiting team performance and the outcome of the game (win or loss). Second, we will use linear regression to assess whether there is a relationship between the climate and weather variables, time, and visiting team performance and the number of runs scored by  Boston. Finally, we will use decision trees to model the duration and attendance of games. 
+We will use different models to address several different questions. First, we will use logistic regression to assess whether there is a relationship between the climate and weather variables, time, and visiting team performance and the outcome of the game (win or loss). Second, we will use linear regression to assess whether there is a relationship between the climate and weather variables, time, and visiting team performance and the number of runs scored by  Boston. Finally, we will use decision trees to build predictive models for the duration and attendance of games. 
 
 For the first two models, we use the bootstrap in order to estimate the sampling distributions and confidence intervals for the model coefficients. For the decision tree models, we use cross-validation to tune hyperparameters and estimate the predictive accuracy of the models.
 
@@ -622,12 +622,12 @@ For the first two models, we use the bootstrap in order to estimate the sampling
 
 @fig-log_reg-win-prob shows a series of bootstrap predictions for the probability of a win for the Red Sox as a function of the visiting team's performance. We observe that as the visiting team's performance increases, the probability of a win for the Red Sox decreases. The observed data is plotted along with the model predictions.  
 
-![Bootstrap predictions for logistic regression model for win/loss.](../figs/win_loss_logistic_reg_preds.png){#fig-log_reg-win-prob fig-width=5 fig-height=8}
+![Bootstrap predictions for logistic regression model for win/loss plotted against the number of runs scored by a visiting team.](../figs/win_loss_logistic_reg_preds.png){#fig-log_reg-win-prob fig-width=5 fig-height=8}
 
 
 ### Predictors of Runs Scored
 
-@fig-lm-coeff shows the bootstrap estimates for the linear regression coefficients for the predictors of number of runs scored by teh Red Sox along with estimates for the 95% confidence intervals. Since the confidence intervals for humididty, precipitation, and temperature all include 0, we cannot conclude that there is a relationship between these variables and the number of runs. The model does provide evidence that the number of runs scored by the Red Sox has increased over time, and that the visiting team's performance is positively associated with the number of runs scored by the Red Sox. However, in both cases the effect size is quite small.
+@fig-lm-coeff shows the bootstrap estimates for the linear regression coefficients for the predictors of number of runs scored by the Red Sox along with estimates for the 95% confidence intervals. Since the confidence intervals for humidity, precipitation, and temperature all include 0, we cannot conclude that there is a relationship between these variables and the number of runs. The model does provide evidence that the number of runs scored by the Red Sox has increased over time, and that the visiting team's performance is positively associated with the number of runs scored by the Red Sox. However, in both cases the effect size is quite small.
 
 ![Bootstrap estimates for linear regression coefficients for number of runs scored by Red Sox.](../figs/predictors_of_runs.png){#fig-lm-coeff fig-width=5 fig-height=8}
 
