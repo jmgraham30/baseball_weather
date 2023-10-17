@@ -723,6 +723,10 @@ In terms of the attendance and duration of Boston home games at Fenway Park, we 
 
 It's likely that we could improve our analysis, especially as it relates to the predictive models if we were to include more data. For example, we could include data from other ballparks to see if the results are consistent. Further, we could include more variables in our models. For example, we could include the number of hits, errors, and walks for each team as predictors in our models. We could also include the number of fans in attendance at the game as a predictor in our models. Finally, we should consider utilizing other modeling approaches such as random forests or support vector machines that may provide a higher degree of accuracy for predictive modeling.
 
+## Acknowledgements
+
+All data used in this project are from publicly available sources. The data for the climate and weather variables were obtained from the [National Centers for Environmental Information](https://www.ncdc.noaa.gov/cdo-web/). The data for the game attendance, duration, and outcome variables were obtained from [Baseball Reference](https://www.baseball-reference.com/). All code and data used in the analysis for this project is available on a [GitHub repository](https://github.com/jmgraham30/baseball_weather).
+
 
 ## References
 
