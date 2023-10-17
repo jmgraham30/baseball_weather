@@ -227,7 +227,7 @@ boston_game_weather %>%
 
 This is our principal data set and it contains 5,727 rows.
 
-## Exploratory Analysis and Results
+## Exploratory Analysis and Observations
 
 The script [`boston_home_weather_eda.R`](https://github.com/jmgraham30/baseball_weather/blob/main/R/boston_home_weather_eda.R) contains the full exploratory analysis and all corresponding code.
 
@@ -509,7 +509,7 @@ We clearly see that the attendance of games has generally increased from 1950 to
 
 2) While attendance appears to increase with increasing temperature, humidity, and precipitable water it is unlikely that an increase in temperature, humidity, or precipitable water *causes* more people to attend Red Sox home games. For example, attendance might be increasing over time for any number of reasons and perhaps temperature, humidity, and precipitable water are increasing with time. Further exploratory analysis might provide insight on this. 
 
-## Further Exploratory Analysis
+### Further Exploratory Analysis
 
 @fig-yearly-wins shows the *average* number of home game wins per year for the Red Sox.  
 
@@ -679,14 +679,18 @@ Similar to our analysis for game attendance, we start with a linear regression m
 
 ![Bootstrap estimates for linear regression coefficients for game duration.](../figs/duration_ests.png){#fig-dur-ests fig-width=8 fig-height=6}
 
-The results of the tuned decision tree model for game duration are shown in @fig-duration_vip and @fig-duration_preds. We observe that the most important predictors for the model are the date and the number of runs scored by each team. The model predictions are plotted against the observed values in @fig-duration_preds. We observe that the model does a reasonable job of predicting the game duration except when the games are particularly long.
+The results of the tuned decision tree model for game duration are shown in @fig-duration_vip and @fig-duration_preds. We observe from @fig-duration_vip that the most important predictors for the model are the date and the number of runs scored by each team. 
 
 ![Variable importance measures for predictors in tuned decision tree model for the game duration.](../figs/duration_vip.png){#fig-duration_vip fig-width=5 fig-height=8}
 
+The importance of variables in the predictive model are consistent with the results of the linear regression model.
 
+The model predictions are plotted against the observed values in @fig-duration_preds. We observe that the model does a reasonable job of predicting the game duration except when the games are particularly long.
 
 ![Predicted values versus observed values for tuned decision tree model for game duration.](../figs/duration_preds.png){#fig-duration_preds fig-width=5 fig-height=8}
 
+
+@tbl-duration-metrics records the values of test error metrics used to assess the performance of the tuned decision tree model for game duration.
 
 ```{r}
 #| echo: false
@@ -707,8 +711,17 @@ duration_metrics_tbl %>%
         
 ```
 
+Based on the test error metrics, we conclude that this model is mediocre with regard to its predictive accuracy but its qualitative results are consistent with those of our linear regression analysis.
+
 ## Conclusions
 
+In this report, we have analyzed relationships between climate and weather, and game attendance, duration, and outcome for Boston Red Sox home games from 1950 to 2022. There is little evidence to suggest that there is a relationship between climate and weather and the outcome of games in terms of either wins/losses or runs scored. This is likely because there are many factors that influence the outcome of a baseball game and we have not included many of these. Further, Fenway Park is far north and near the coast, so changes in the climate and weather are perhaps not extreme enough to have a large impact on the outcome of games. In the future, it would be helpful to include are larger sampling of games from other ballparks to see if the results are consistent. 
+
+While we did not discover evidence for an impact of weather or climate on the outcomes of Red Sox home games, we have quantified the impact of visiting team runs on the likelihood of the Red Sox winning a game. Specifically, if a visiting team scores 5 or more runs, then the changes of the Red Sox winning the game are less than 50%. On the other hand, there is also evidence that there is a slight increase in the number of runs scored by the Red Sox whenever the visiting team scores more runs. This is not unreasonable because the Red Sox would be more motivated to score more runs if the visiting team scores more runs.
+
+In terms of the attendance and duration of Boston home games at Fenway Park, we have discovered evidence that increased precipitation may result in a slight decrease in attendance while increased temperature may result in a slight increase in attendance. Further, we have discovered evidence that games are shorter when the Red Sox win, but overall longer when more runs are scored by either team. Finally, there is evidence that games have gotten longer over time.
+
+It's likely that we could improve our analysis, especially as it relates to the predictive models if we were to include more data. For example, we could include data from other ballparks to see if the results are consistent. Further, we could include more variables in our models. For example, we could include the number of hits, errors, and walks for each team as predictors in our models. We could also include the number of fans in attendance at the game as a predictor in our models. Finally, we should consider utilizing other modeling approaches such as random forests or support vector machines that may provide a higher degree of accuracy for predictive modeling.
 
 
 ## References
