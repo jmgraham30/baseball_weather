@@ -671,7 +671,7 @@ attend_metrics_tbl %>%
 ```
 
 
-Based on the test error metrics, we conclude that this model is mediocre with regard to its predictive accuracy although its qualitative results are consistent with those of our linear regression analysis.  
+Based on the test error metrics, we conclude that this model is good with regard to its predictive accuracy and its qualitative results are consistent with those of our linear regression analysis.  
 
 ### Game Duration Model Results
 
