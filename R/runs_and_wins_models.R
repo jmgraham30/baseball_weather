@@ -76,6 +76,7 @@ win_loss_intervals <- reg_intervals(wl_binary ~ date + vis_runs + humid + precip
                                     data=boston_game_weather,
                                     model_fn = "glm",
                                     family = "binomial",
+                                    type = "percentile",
                                     keep_reps = TRUE)
 
 
@@ -84,6 +85,20 @@ runs_intervals <- reg_intervals(hm_runs ~ date + vis_runs + humid + precip + tem
                                     model_fn = "lm",
                                     type = "percentile",
                                     keep_reps = TRUE)
+
+
+win_loss_intervals %>% ggplot(aes(x=.estimate,y=term)) + 
+  geom_point(size=2) + 
+  geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
+  geom_vline(xintercept = 0.0,linetype = "dashed") +
+  labs(x="Coefficient Estimate",y="Predictor",title="Win/Loss Model Coefficients") 
+
+
+runs_intervals %>% ggplot(aes(x=.estimate,y=term)) + 
+  geom_point(size=2) + 
+  geom_errorbar(aes(xmin=.lower,xmax=.upper),width=0.1) + 
+  geom_vline(xintercept = 0.0,linetype = "dashed") +
+  labs(x="Coefficient Estimate",y="Predictor",title="Boston Runs Model Coefficients") 
 
 runs_intervals %>%
   unnest(.replicates) %>%

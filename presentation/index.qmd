@@ -343,13 +343,17 @@ as_precip <- boston_game_weather %>%
 #| message: false
 
 
-boston_game_weather %>%
+prop_wins <- boston_game_weather %>%
   group_by(year) %>%
-  summarise(wins_by_year=sum(wl_binary)) %>%
-  ggplot(aes(x=year,y=wins_by_year)) + 
-  geom_point(size=2,color="darkgreen") + 
+  summarise(games_played=n(), games_won = sum(wl_binary)) %>%
+  mutate(win_pct = games_won / games_played)
+
+prop_wins %>%
+  ggplot(aes(x=year,y=win_pct)) + 
+  geom_point(size=2,color="darkgreen",alpha=0.5) + 
   geom_smooth(color="#512d6d",fill="lightblue") + 
-  labs(x="Year",y="Number of Wins")
+  labs(x="Year",y="Win Percentage") + 
+  ylim(c(0,1))
 ```
 
 ## Weather Over Time
@@ -403,7 +407,7 @@ wb_precip <- boston_game_weather %>%
 
 ## Model Estimates for Win/Loss
 
-![Bootstrap estimates for logistic regression coefficients for win/loss.](../figs/win_loss_log_reg_coeffs.png){#fig-log_reg-coeff fig-width=3 fig-height=4}
+![Bootstrap estimates for logistic regression coefficients for win/loss.](../figs/win_prob_coeffs.png){#fig-log_reg-coeff fig-width=3 fig-height=4}
 
 ## Win/Loss Model Predictions
 
@@ -411,23 +415,23 @@ wb_precip <- boston_game_weather %>%
 
 ## Model Estimates for Red Sox Runs
 
-![Bootstrap estimates for linear regression coefficients for number of runs scored by Red Sox.](../figs/predictors_of_runs.png){#fig-lm-coeff fig-width=5 fig-height=8}
+![Bootstrap estimates for linear regression coefficients for number of runs scored by Red Sox.](../figs/boston_runs_coeffs.png){#fig-lm-coeff fig-width=5 fig-height=8}
 
 
 ## Attendance Predictors
 
 
-![Game Attendance](../figs/attend_coeffs.png)
+![Bootstrap estimates for linear regression coefficients for game attendance.](../figs/attend_coeffs.png)
 
 ## Attendance Variable Importance
 
 
-![Game Attendance](../figs/attendance_vip.png)
+![Variable importance measures for predictors of game attendance.](../figs/attendance_vip.png)
 
 
 ## Attendance Predictions
 
-![Game Attendance](../figs/attendance_predictions.png)
+![Predicted versus observed game attendance.](../figs/attendance_predictions.png)
 
 ## Attendance Model Performance
 
@@ -450,17 +454,17 @@ attend_metrics_tbl %>%
 
 ## Duration Predictors
 
-![Game Duration](../figs/duration_coeffs.png)
+![Bootstrap estimates for linear regression coefficients for game duration.](../figs/duration_coeffs.png)
 
 
 ## Duration Variable Importance
 
 
-![Game Duration](../figs/duration_vip.png)
+![Variable importance measures for game duration.](../figs/duration_vip.png)
 
 ## Duration Predictions
 
-![Game Duration](../figs/duration_preds.png)
+![Predicted versus observed game duration.](../figs/duration_preds.png)
 
 
 ## Duration Model Performance
